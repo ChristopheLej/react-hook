@@ -5,5 +5,5 @@ Many thanks at _Pitipat Srichairat_ for his [article](https://medium.com/@pitipa
 Ths project contains 3 same dropdown element with a different implementation:
 
 - **_DropdownNoneHooks_**: dropdown normal extends React.Component with state, ...
-- **_DropdownWithHooks_**: dropdown with hook in the FunctionComponent and all hooks are integreted in the code
+- **_DropdownWithHooks_**: dropdown with hook in the FunctionComponent and all hooks are integrated in the code
 - **_DropdownWithCallback_**: dropdown with hook in the FunctionComponent but a generic hook (useClickOutside) is external of the function for reusing
