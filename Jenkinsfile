@@ -1,7 +1,9 @@
 pipeline {
-  stage ("Get source") {
-    steps {
-      checkout scm
+  stages {
+    stage ("Get source") {
+      steps {
+        checkout scm
+      }
     }
   }
 }
