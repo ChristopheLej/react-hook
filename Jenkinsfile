@@ -4,8 +4,9 @@ pipeline {
   stages {
     stage ("Get source") {
       steps {
+        echo "====++++something++++===="
         checkout scm
       }
     }
   }
-}()
+}
