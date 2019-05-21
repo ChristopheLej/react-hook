@@ -56,11 +56,19 @@ pipeline {
                 break
             }
 
-            echo "URL of the web is ${config['server']}"
+            env.WebUrl=config['server']
           }
           echo " =========== ~~~~~~~~~~~~ ============ "
         }
 
+      }
+    }
+
+    stage ("Get URL") {
+      steps {
+				script {
+            echo "URL of the web is ${WebUrl}"
+        }
       }
     }
   }
