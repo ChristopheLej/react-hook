@@ -14,7 +14,18 @@ pipeline {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
           script{
             def config = readJSON file: "${CONFIG_FILE}"
-            echo config['env']
+            switch( config['env'])
+            {
+              case "DEV":
+                echo "The platform is development"
+                break
+              case "PROD":
+                echo "The platform is production"
+                break
+              default:
+                echo "The platform is unknown"
+                break
+            }
           }
           echo " =========== ~~~~~~~~~~~~ ============ "
         }
