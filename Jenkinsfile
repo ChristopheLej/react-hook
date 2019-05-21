@@ -13,6 +13,7 @@ pipeline {
 		stage ("Init") {
 			steps {
 				script {
+          echo "Your choice is: ${params.Environment}"
           switch("${params.Environment}")
           {
             case "Development":
