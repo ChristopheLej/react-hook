@@ -8,7 +8,12 @@ pipeline {
         configFileProvider([configFile(fileId:'6e4385d1-4f03-4132-97b5-1b0e1365346d', variable:'CONFIG_FILE')]) {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
           echo "${CONFIG_FILE}"
-          sh "cat $CONFIG_FILE"
+
+          script{
+            def text = readFile "${CONFIG_FILE}"
+            echo text
+          }
+
           echo " =========== ~~~~~~~~~~~~ ============ "
         }
       }
