@@ -8,8 +8,8 @@ pipeline {
         configFileProvider([configFile(fileId:'6e4385d1-4f03-4132-97b5-1b0e1365346d', variable:'CONFIG_FILE')]) {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
           sh "cat ${env.CONFIG_FILE}"
-          def props = readJSON file: '${env.CONFIG_FILE}'
-          echo "environment: ${props['env']}"
+          sh "def props = readJSON file: '${env.CONFIG_FILE}'"
+          sh "echo "environment: ${props['env']}"
           echo " =========== ~~~~~~~~~~~~ ============ "
         }
       }
