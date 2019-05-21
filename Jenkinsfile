@@ -27,6 +27,7 @@ pipeline {
           }
         }
       }
+    }
 
     stage ("Get source") {
       steps {
