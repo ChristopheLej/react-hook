@@ -42,6 +42,7 @@ pipeline {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
           script{
             def config = readJSON file: "${CONFIG_FILE}"
+
             switch( config['env'])
             {
               case "DEV":
@@ -54,6 +55,8 @@ pipeline {
                 echo "The platform is unknown"
                 break
             }
+
+            echo "URL of the web is ${config['server']}"
           }
           echo " =========== ~~~~~~~~~~~~ ============ "
         }
