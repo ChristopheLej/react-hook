@@ -9,7 +9,7 @@ pipeline {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
           echo "${CONFIG_FILE}"
           sh "cat ${CONFIG_FILE}"
-          sh "cat ${CONFIG_FILE}"" | awk -v -k='text' '{n=split($0,a,',''); for (i=1; i<=n; i++) print a[i]}'"
+          sh "cat ${CONFIG_FILE}"" | awk -v -k='text' '{n=split(\$0,a,',''); for (i=1; i<=n; i++) print a[i]}'"
           echo " =========== ~~~~~~~~~~~~ ============ "
         }
       }
