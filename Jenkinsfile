@@ -10,7 +10,7 @@ pipeline {
 	}
 
   stages {
-		stage ("EnvironnmentVariables") {
+		stage ("Init") {
 			steps {
 				script {
           switch("${params.Environment}")
