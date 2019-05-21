@@ -10,6 +10,12 @@ pipeline {
           sh "cat ${env.CONFIG_FILE}"
           echo " =========== ~~~~~~~~~~~~ ============ "
         }
+
+        configFileProvider([configFile(fileId:'JsonConfig', variable:'CONFIG_FILE')]) {
+          echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
+          sh "cat ${env.CONFIG_FILE}"
+          echo " =========== ~~~~~~~~~~~~ ============ "
+        }
       }
     }
   }
