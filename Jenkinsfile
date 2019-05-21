@@ -45,7 +45,7 @@ pipeline {
 
             keys= config.keySet()
             for(key in keys) {
-              value = props["${key}"]
+              value = config["${key}"]
               env."${key}" = "${value}"
             }
 
