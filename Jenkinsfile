@@ -43,6 +43,12 @@ pipeline {
           script{
             def config = readJSON file: "${CONFIG_FILE}"
 
+            keys= config.keySet()
+            for(key in keys) {
+              value = props["${key}"]
+              env."${key}" = "${value}"
+            }
+
             switch( config['env'])
             {
               case "DEV":
@@ -56,7 +62,7 @@ pipeline {
                 break
             }
 
-            env.WebUrl=config['server']
+            //env.WebUrl=config['server']
           }
           echo " =========== ~~~~~~~~~~~~ ============ "
         }
