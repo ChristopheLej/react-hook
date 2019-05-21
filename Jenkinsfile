@@ -9,7 +9,7 @@ pipeline {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
           sh "cat ${env.CONFIG_FILE}"
           sh "def props = readJSON file: '${env.CONFIG_FILE}'"
-          sh "echo "environment: ${props['env']}"
+          sh "echo "environment: ${props['env']}""
           echo " =========== ~~~~~~~~~~~~ ============ "
         }
       }
