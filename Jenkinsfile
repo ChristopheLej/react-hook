@@ -47,6 +47,7 @@ pipeline {
             for(key in keys) {
               value = config["${key}"]
               env."${key}" = "${value}"
+              echo "${key} - ${value}"
             }
 
             switch( config['env'])
