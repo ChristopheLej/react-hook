@@ -48,7 +48,7 @@ pipeline {
             env.DB_CLUSTER="$TF_VAR_APP_NAME-$TF_VAR_BR_NAME"
 
 
-            switch(${env})
+            switch("${ENVIRONMENT}")
             {
               case "DEV":
                 echo "The platform is development"
