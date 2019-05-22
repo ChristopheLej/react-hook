@@ -77,7 +77,7 @@ pipeline {
           echo "URL of the web is ${WebUrl}"
 
           for(e in env){
-            echo e + " is " + ${e}
+            echo e
           }
 
         }
