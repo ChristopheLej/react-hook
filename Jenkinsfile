@@ -10,8 +10,6 @@ pipeline {
 	}
 
   environment {
-    script {
-      echo "Your choice is: ${params.Environment}"
       switch("${params.Environment}")
       {
         case "Development":
@@ -24,7 +22,6 @@ pipeline {
           FILE_ID="6e4385d1-4f03-4132-97b5-1b0e1365346d"
           break
       }
-    }
   }
 
 
