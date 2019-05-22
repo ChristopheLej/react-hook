@@ -75,15 +75,14 @@ pipeline {
       steps {
 				script {
           echo "URL of the web is ${WebUrl}"
-
-node {
-          for(e in env){
-            echo e
-          }
-}
-
+          printParams()
         }
       }
     }
   }
+}
+
+
+def printParams() {
+  env.getEnvironment().each { name, value -> println "Name: $name -> Value $value" }
 }
