@@ -42,14 +42,14 @@ pipeline {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
           script{
 
-            def config = readJSON file: "${CONFIG_FILE}"
+            // def config = readJSON file: "${CONFIG_FILE}"
 
-            keys= config.keySet()
-            for(key in keys) {
-              // value = config["${key}"]
-              // env."${key}" = "${value}"
-              env."${key}" = config["${key}"]
-            }
+            // keys= config.keySet()
+            // for(key in keys) {
+            //   // value = config["${key}"]
+            //   // env."${key}" = "${value}"
+            //   env."${key}" = config["${key}"]
+            // }
             
             loadEnvironmentVariables("${CONFIG_FILE}")
 
