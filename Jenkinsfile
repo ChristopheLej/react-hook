@@ -47,8 +47,11 @@ pipeline {
             for(key in keys) {
               value = config["${key}"]
               env."${key}" = "${value}"
-              echo "${key} - ${value}"
             }
+
+            env.TF_VAR_BR_NAME="${params.Environment}".toLowerCase().replace('_','-')
+            env.DB_CLUSTER="$TF_VAR_APP_NAME-$TF_VAR_BR_NAME"
+
 
             switch( config['env'])
             {
@@ -84,5 +87,5 @@ pipeline {
 
 
 def printParams() {
-  env.getEnvironment().each { name, value -> println "$name -> $value" }
+  env.getEnvironment().each { name, value -> println "$name: $value" }
 }
