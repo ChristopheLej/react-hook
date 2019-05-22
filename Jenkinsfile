@@ -76,9 +76,11 @@ pipeline {
 				script {
           echo "URL of the web is ${WebUrl}"
 
+node {
           for(e in env){
             echo e
           }
+}
 
         }
       }
