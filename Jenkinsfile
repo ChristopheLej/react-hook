@@ -74,7 +74,12 @@ pipeline {
     stage ("Get URL") {
       steps {
 				script {
-            echo "URL of the web is ${WebUrl}"
+          echo "URL of the web is ${WebUrl}"
+
+          for(e in env){
+            echo e + " is " + ${e}
+          }
+
         }
       }
     }
