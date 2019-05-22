@@ -41,15 +41,6 @@ pipeline {
         configFileProvider([configFile(fileId:env.FILE_ID, variable:'CONFIG_FILE')]) {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
           script{
-
-            // def config = readJSON file: "${CONFIG_FILE}"
-
-            // keys= config.keySet()
-            // for(key in keys) {
-            //   // value = config["${key}"]
-            //   // env."${key}" = "${value}"
-            //   env."${key}" = config["${key}"]
-            // }
             
             loadEnvironmentVariables("${CONFIG_FILE}")
 
@@ -57,7 +48,7 @@ pipeline {
             env.DB_CLUSTER="$TF_VAR_APP_NAME-$TF_VAR_BR_NAME"
 
 
-            switch( config['env'])
+            switch(${env})
             {
               case "DEV":
                 echo "The platform is development"
@@ -90,11 +81,10 @@ pipeline {
 }
 
 def loadEnvironmentVariables(path) {
-  echo path
-  def props = readJSON file: path
-  keys= props.keySet()
+  def config = readJSON file: path
+  keys= config.keySet()
   for(key in keys) {
-    env."${key}" = props["${key}"]
+    env."${key}" = config["${key}"]
   }
 }
 
