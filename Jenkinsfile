@@ -91,6 +91,7 @@ pipeline {
 
 def loadEnvironmentVariables(path) {
   echo path
+  def config = readJSON file: path
 }
 
 def printParams() {
