@@ -81,7 +81,7 @@ pipeline {
 }
 
 def loadEnvironmentVariables(path) {
-  def config = readJSON file: "${CONFIG_FILE}"
+  def config = readJSON file: path
 
   keys= config.keySet()
   for(key in keys) {
