@@ -91,10 +91,10 @@ pipeline {
 
 def loadEnvironmentVariables(path) {
   echo path
-  def config = readJSON file: path
-  keys= config.keySet()
+  def props = readJSON file: path
+  keys= props.keySet()
   for(key in keys) {
-    env."${key}" = config["${key}"]
+    env."${key}" = props["${key}"]
   }
 }
 
