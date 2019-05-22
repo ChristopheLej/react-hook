@@ -84,5 +84,5 @@ pipeline {
 
 
 def printParams() {
-  env.getEnvironment().each { name, value -> println "Name: $name -> Value $value" }
+  env.getEnvironment().each { name, value -> println "$name -> $value" }
 }
