@@ -23,13 +23,13 @@ pipeline {
           switch("${params.Environment}")
           {
             case "Development":
-              env.FILE_ID="6e4385d1-4f03-4132-97b5-1b0e1365346d"
+              env.FILE_ID=env.DEV_FILE_ID
               break
             case "Production":
-              env.FILE_ID="552f9ace-592c-4646-bad1-23df8a4535c7"
+              env.FILE_ID=env.PROD_FILE_ID
               break
             default:
-              env.FILE_ID="6e4385d1-4f03-4132-97b5-1b0e1365346d"
+              env.FILE_ID=env.DEV_FILE_ID
               break
           }
         }
