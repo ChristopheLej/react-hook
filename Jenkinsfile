@@ -99,7 +99,7 @@ pipeline {
             def value = "${elem.value}"
             echo "$value"
             echo "${env.$value}"
-            echo "export ${elem.key}=`echo -n XXXXX |base64 -w0`"
+            echo "export ${elem.key}=`echo -n "${elem.value}" |base64 -w0`"
           }
           // for (kv in mapToList(data)) {
           //   //echo "sh make build KEY=${kv[0]} VALUE='${kv[1]}'"
