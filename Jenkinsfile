@@ -102,12 +102,12 @@ pipeline {
             sh "export ${kv[0]}=`echo -n ${kv[1]} |base64 -w0`"
           }
 
-          sh "envsubst <$workingPath/smarter-eff-secrets.yaml > $workingPath/smarter-eff-secrets-ok.yaml && cat $workingPath/smarter-eff-secrets-ok.yaml"
+          // sh "envsubst <$workingPath/smarter-eff-secrets.yaml > $workingPath/smarter-eff-secrets-ok.yaml && cat $workingPath/smarter-eff-secrets-ok.yaml"
           // for(elem in data) {
           //   sh "export ${elem.key}=`echo -n ${elem.value} |base64 -w0`"
           // }
 
-          //printParams()
+          printParams()
         }
       }
     }
