@@ -99,15 +99,8 @@ pipeline {
             echo "export ${elem.key}=`echo -n ${elem.value} |base64 -w0`"
             sh "export ${elem.key}=`echo -n ${elem.value} |base64 -w0`"
           }
-          // for (kv in mapToList(data)) {
-          //   //echo "sh make build KEY=${kv[0]} VALUE='${kv[1]}'"
-          //   cmd. += "&& export ${kv[0]}=`echo -n ${${kv[1]}}|base64 -w0` "
-          // }
 
-          echo cmd
-
-
-          printParams()
+          //printParams()
         }
       }
     }
