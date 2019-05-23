@@ -84,9 +84,16 @@ pipeline {
           echo "URL of the web is ${WebUrl}"
           //printParams()
 
-					def cmd = "cd $workingPath/Applications \
-							&& export TF_VAR_BR_NAME=`echo -n $TF_VAR_BR_NAME|base64 -w0` "
+          def data = [
+            "TF_VAR_BR_NAME": "TF_VAR_BR_NAME",
+            "SMARTER_EFF_BDD_USER": "BDD_USER"
+          ]
 
+          def cmd = "cd $workingPath/Applications "
+          for (kv in mapToList(data)) {
+            cmd += "&& export ${kv[0]}=`echo -n ${${kv[1]}}|base64 -w0` "
+          }
+          
           echo cmd
 
 
