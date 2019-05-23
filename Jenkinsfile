@@ -17,6 +17,7 @@ pipeline {
 
   stages {
 		stage ("Init") {
+      env.workingPath = "${pwd()}"
 			steps {
 				script {
           echo "Your choice is: ${params.Environment}"
@@ -32,10 +33,6 @@ pipeline {
               env.FILE_ID=env.DEV_FILE_ID
               break
           }
-
-          def test = "1234"
-
-          echo "$test"
         }
       }
     }
@@ -83,7 +80,12 @@ pipeline {
       steps {
 				script {
           echo "URL of the web is ${WebUrl}"
-          printParams()
+          //printParams()
+
+					def cmd = "cd $workingPath/Applications \
+							&& export TF_VAR_BR_NAME=`echo -n $TF_VAR_BR_NAME|base64 -w0` "
+
+          echo cmd
         }
       }
     }
