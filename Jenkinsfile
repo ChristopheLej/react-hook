@@ -96,7 +96,7 @@ pipeline {
 
           def cmd = "cd $workingPath/Applications "
           for(elem in data) {
-            echo "export ${elem.key}"
+            echo "export ${elem.key}=`echo -n $SMARTER_EFF_URL |base64 -w0`"
           }
           // for (kv in mapToList(data)) {
           //   //echo "sh make build KEY=${kv[0]} VALUE='${kv[1]}'"
