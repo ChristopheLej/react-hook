@@ -85,9 +85,14 @@ pipeline {
           //printParams()
 
           def data = [
-            "TF_VAR_BR_NAME": "TF_VAR_BR_NAME",
-            "SMARTER_EFF_BDD_USER": "BDD_USER"
+            TF_VAR_BR_NAME: TF_VAR_BR_NAME,
+            SMARTER_EFF_BDD_USER: BDD_USER
           ]
+
+          def map = [Io: 1, Europa: deux, Ganymed: 3]
+          for (element in map) {
+              echo "${element.key} ${element.value}"
+          }
 
           def cmd = "cd $workingPath/Applications "
           for(elem in data) {
