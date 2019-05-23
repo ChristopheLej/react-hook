@@ -17,7 +17,6 @@ pipeline {
 
   stages {
 		stage ("Init") {
-      env.workingPath = "${pwd()}"
 			steps {
 				script {
           echo "Your choice is: ${params.Environment}"
@@ -33,6 +32,9 @@ pipeline {
               env.FILE_ID=env.DEV_FILE_ID
               break
           }
+
+          env.workingPath = "${pwd()}"
+
         }
       }
     }
@@ -86,6 +88,9 @@ pipeline {
 							&& export TF_VAR_BR_NAME=`echo -n $TF_VAR_BR_NAME|base64 -w0` "
 
           echo cmd
+
+
+          printParams()
         }
       }
     }
