@@ -41,7 +41,7 @@ pipeline {
 
     stage ("Get source") {
       steps {
-        checkout scm
+        // checkout scm
         script {
           def props = readJSON file: 'package.json'
           echo props['version']
@@ -91,9 +91,10 @@ pipeline {
 
           def cmd = "cd $workingPath/Applications "
           for (kv in mapToList(data)) {
-            cmd += "&& export ${kv[0]}=`echo -n ${${kv[1]}}|base64 -w0` "
+            echo "sh make build KEY=${kv[0]} VALUE='${kv[1]}'"
+            //cmd += "&& export ${kv[0]}=`echo -n ${${kv[1]}}|base64 -w0` "
           }
-          
+
           echo cmd
 
 
