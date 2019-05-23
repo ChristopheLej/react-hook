@@ -96,7 +96,9 @@ pipeline {
 
           def cmd = "cd $workingPath/Applications "
           for(elem in data) {
-            echo "export ${elem.key}=`echo -n $TF_VAR_APP_NAME |base64 -w0`"
+            def value = "$${elem.value}"
+            echo "$value"
+            echo "export ${elem.key}=`echo -n XXXXX |base64 -w0`"
           }
           // for (kv in mapToList(data)) {
           //   //echo "sh make build KEY=${kv[0]} VALUE='${kv[1]}'"
