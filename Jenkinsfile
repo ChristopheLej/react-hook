@@ -32,6 +32,10 @@ pipeline {
               env.FILE_ID=env.DEV_FILE_ID
               break
           }
+
+          def test = "1234"
+
+          echo "$test"
         }
       }
     }
