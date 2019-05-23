@@ -96,7 +96,7 @@ pipeline {
 
           sh "cd $workingPath"
           for(elem in data) {
-            echo "export ${elem.key}=`echo -n $value |base64 -w0`"
+            echo "export ${elem.key}=`echo -n ${elem.value} |base64 -w0`"
             sh "export ${elem.key}=`echo -n ${elem.value} |base64 -w0`"
           }
           // for (kv in mapToList(data)) {
