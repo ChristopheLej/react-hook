@@ -95,7 +95,7 @@ pipeline {
           }
 
 
-          sh "cd $workingPath"
+          sh "cd $workingPath && echo export foo=bar"
           //sh "export TF_VAR_BR_NAME=`echo -n $TF_VAR_BR_NAME |base64 -w0`"
 
           for (kv in mapToList(data)) {
