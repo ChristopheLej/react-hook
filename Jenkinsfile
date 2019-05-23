@@ -90,8 +90,8 @@ pipeline {
           ]
 
           def cmd = "cd $workingPath/Applications "
-          for(element in data) {
-            echo "export ${kv[0]}=`echo -n $${kv[1]}|base64 -w0`"
+          for(elem in data) {
+            echo "export ${elem.key}=`echo -n $${elem.value}|base64 -w0`"
           }
           // for (kv in mapToList(data)) {
           //   //echo "sh make build KEY=${kv[0]} VALUE='${kv[1]}'"
