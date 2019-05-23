@@ -116,3 +116,10 @@ def loadEnvironmentVariables(path) {
 def printParams() {
   env.getEnvironment().each { name, value -> println "$name: $value" }
 }
+
+@NonCPS
+List<List<?>> mapToList(Map map) {
+  return map.collect { it ->
+    [it.key, it.value]
+  }
+}
