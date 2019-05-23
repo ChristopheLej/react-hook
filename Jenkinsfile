@@ -95,12 +95,11 @@ pipeline {
           }
 
           sh "cd $workingPath"
-          sh "export TF_VAR_BR_NAME=`echo -n $TF_VAR_BR_NAME |base64 -w0`"
+          //sh "export TF_VAR_BR_NAME=`echo -n $TF_VAR_BR_NAME |base64 -w0`"
 
-          // for(elem in data) {
-          //   echo "export ${elem.key}=`echo -n ${elem.value} |base64 -w0`"
-          //   sh "export ${elem.key}=`echo -n ${elem.value} |base64 -w0`"
-          // }
+          for(elem in data) {
+            sh "export ${elem.key}=`echo -n ${elem.value} |base64 -w0`"
+          }
 
           //printParams()
         }
