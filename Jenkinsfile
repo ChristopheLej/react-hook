@@ -96,9 +96,9 @@ pipeline {
 
           def cmd = "cd $workingPath/Applications "
           for(elem in data) {
-            def value = "$${elem.value}"
+            def value = "${elem.value}"
             echo "$value"
-            echo "${env.${elem.value}}"
+            echo "${env.$value}"
             echo "export ${elem.key}=`echo -n XXXXX |base64 -w0`"
           }
           // for (kv in mapToList(data)) {
