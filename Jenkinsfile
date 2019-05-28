@@ -89,6 +89,7 @@ pipeline {
             SMARTER_EFF_BDD_USER: BDD_USER
           ]
 
+          input message: 'Finished using the web site? (Click "Proceed" to continue)'
           def map = [Io: "1", Europa: "deux", Ganymed: "3"]
           for (element in map) {
               echo "${element.key} ${element.value}"
