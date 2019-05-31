@@ -78,6 +78,16 @@ pipeline {
       }
     }
 
+    stage ("Build") {
+      steps {
+        env.workingPath = "${pwd()}"
+        def dockerImage = docker.build("build:${currentBuild.projectName}")
+        dockerImage.inside("--net=host --user root  -v /var/run/docker.sock:/var/run/docker.sock") {
+          sh "ls"
+        }
+      }
+    }
+
     stage ("Get URL") {
       steps {
 				script {
@@ -113,6 +123,16 @@ pipeline {
       }
     }
   }
+}
+
+def dockerBuildOrUse(String image, String dockerFile, String buildFolder) {
+	def imageDocker
+	dir (buildFolder) {
+		// Build image if need
+    echo "Build image $image"
+    imageDocker = docker.build("$image:$image-$TF_VAR_BR_NAME", "-f $dockerFile $buildFolder")
+	}
+	return imageDocker;
 }
 
 def loadEnvironmentVariables(path) {
