@@ -82,10 +82,13 @@ pipeline {
     stage ("Build") {
       steps {
         script {
-          def dockerImage = docker.build("build:${currentBuild.projectName}")
-          dockerImage.inside("--net=host --user root  -v /var/run/docker.sock:/var/run/docker.sock") {
-            sh "ls"
+          docker.image('node:latest').inside {
+            sh 'npm -v'
           }
+          // def dockerImage = docker.build("build:${currentBuild.projectName}")
+          // dockerImage.inside("--net=host --user root  -v /var/run/docker.sock:/var/run/docker.sock") {
+          //   sh "ls"
+          // }
         }
       }
     }
