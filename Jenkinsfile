@@ -12,6 +12,7 @@ pipeline {
   environment {
     PROD_FILE_ID = "552f9ace-592c-4646-bad1-23df8a4535c7"
     DEV_FILE_ID = "6e4385d1-4f03-4132-97b5-1b0e1365346d"
+
 	}
 
 
@@ -80,7 +81,6 @@ pipeline {
 
     stage ("Build") {
       steps {
-        env.workingPath = "${pwd()}"
         def dockerImage = docker.build("build:${currentBuild.projectName}")
         dockerImage.inside("--net=host --user root  -v /var/run/docker.sock:/var/run/docker.sock") {
           sh "ls"
