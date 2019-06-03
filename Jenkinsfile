@@ -84,7 +84,14 @@ pipeline {
         docker { image 'node:latest' }
       }
       steps {
-        sh 'npm -v'
+        script {
+          def image = docker.build("front:build", "-f dockerfile $workingPath")
+          image.inside() {
+            sh 'npm -v'
+
+            sh 'ls dist'
+          }
+        }
       }
     }
 
