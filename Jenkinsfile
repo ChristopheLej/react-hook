@@ -85,7 +85,9 @@ pipeline {
       }
       steps {
         script {
-          def image = docker.build("front:build", "-f dockerfile $workingPath")
+          dir ($workingPath) {
+            def image = docker.build("front:build", "-f dockerfile $workingPath")
+          }
           image.inside() {
             sh 'npm -v'
 
