@@ -1,5 +1,5 @@
 pipeline {
-  agent any
+  agent none
   
 	parameters{
 	 	choice( name: 'Environment', 
@@ -80,16 +80,11 @@ pipeline {
     }
 
     stage ("Build") {
+      agent {
+        docker { image 'node:latest' }
+      }
       steps {
-        script {
-          docker.image('node:latest').inside {
-            sh 'npm -v'
-          }
-          // def dockerImage = docker.build("build:${currentBuild.projectName}")
-          // dockerImage.inside("--net=host --user root  -v /var/run/docker.sock:/var/run/docker.sock") {
-          //   sh "ls"
-          // }
-        }
+        sh 'npm -v'
       }
     }
 
