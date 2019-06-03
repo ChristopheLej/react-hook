@@ -10,8 +10,8 @@ pipeline {
 	}
 
   environment {
-    PROD_FILE_ID = "552f9ace-592c-4646-bad1-23df8a4535c7"
-    DEV_FILE_ID = "6e4385d1-4f03-4132-97b5-1b0e1365346d"
+    PROD_FILE_ID = "c9f23695-d930-4dd4-90cf-7c25dc324536"
+    DEV_FILE_ID = "e5cbe167-b831-40db-bc97-597b44f16e5e"
 
 	}
 
