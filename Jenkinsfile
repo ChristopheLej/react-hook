@@ -1,6 +1,5 @@
 pipeline {
-  agent none
-  
+  agent any
   
 	parameters{
 	 	choice( name: 'Environment', 
