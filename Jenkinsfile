@@ -86,6 +86,8 @@ pipeline {
       steps {
         script {
           dir (workingPath) {
+            sh 'ls'
+            sh 'docker -v'
             def image = docker.build("front:build", "-f dockerfile $workingPath")
           }
           image.inside() {
