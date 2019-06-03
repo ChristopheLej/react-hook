@@ -85,6 +85,11 @@ pipeline {
       }
       steps {
         script {
+          docker.image('node:latest').withRun() { c ->
+            sh 'npm -v'
+          }
+
+
           dir (workingPath) {
             sh 'ls'
             sh 'docker -v'
