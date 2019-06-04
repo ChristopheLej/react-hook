@@ -97,7 +97,7 @@ sh 'hostname'
 
 					def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
           // def image = docker.build("front:build", "-f dockerfile $workingPath")
-          image.inside("--net=host --user jenkins:jenkins -v /var/run/docker.sock:/var/run/docker.sock") { c->
+          image.inside("--net=host --user root -v /var/run/docker.sock:/var/run/docker.sock") { c->
             sh 'npm -v'
             sh 'ls'
 
