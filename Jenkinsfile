@@ -89,10 +89,10 @@ sh 'echo "$USER"'
 sh 'whoami'
 sh 'hostname'
 
-          docker.image('node:latest').withRun() { c ->
-            sh 'hostname'
-            sh 'npm -v'
-          }
+          // docker.image('node:latest').withRun() { c ->
+          //   sh 'hostname'
+          //   sh 'npm -v'
+          // }
 
 
           dir (workingPath) {
@@ -101,6 +101,7 @@ sh 'hostname'
             def image = docker.build("front:build", "-f dockerfile $workingPath")
           }
           image.inside() {
+            sh 'hostname'
             sh 'npm -v'
 
             sh 'ls dist'
