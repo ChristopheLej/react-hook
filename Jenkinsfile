@@ -152,7 +152,7 @@ sh 'hostname'
     //     }
       // }
     // }
-  // }
+  }
 }
 
 def dockerBuildOrUse(String image, String dockerFile, String buildFolder) {
