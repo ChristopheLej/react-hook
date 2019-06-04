@@ -95,8 +95,9 @@ sh 'hostname'
           // }
 
 
-          def image = docker.build("front:build", "-f dockerfile $workingPath")
-          image.inside { c->
+					def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
+          // def image = docker.build("front:build", "-f dockerfile $workingPath")
+          image.inside("--net=host --user jenkins:jenkins -v /var/run/docker.sock:/var/run/docker.sock") { c->
             sh 'npm -v'
             sh 'ls'
 
@@ -156,7 +157,7 @@ def dockerBuildOrUse(String image, String dockerFile, String buildFolder) {
 	dir (buildFolder) {
 		// Build image if need
     echo "Build image $image"
-    imageDocker = docker.build("$image:$image-$TF_VAR_BR_NAME", "-f $dockerFile $buildFolder")
+    imageDocker = docker.build("$image:build", "-f $dockerFile $buildFolder")
 	}
 	return imageDocker;
 }
