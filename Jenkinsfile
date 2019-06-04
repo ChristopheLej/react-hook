@@ -107,6 +107,7 @@ sh 'hostname'
                //error "Program failed, please read logs..."
             } catch (error) {
               sh 'echo catch'
+              currentBuild.result = "FAILURE"
             } finally {
               sh 'echo finally'
             }
