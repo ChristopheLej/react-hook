@@ -80,11 +80,14 @@ pipeline {
     }
 
     stage ("Build") {
-      agent {
-        docker { image 'node:latest' }
-      }
+      // agent {
+      //   docker { image 'node:latest' }
+      // }
       steps {
         script {
+sh 'echo "$USER"'
+sh 'whoami'
+
           docker.image('node:latest').withRun() { c ->
             sh 'npm -v'
           }
