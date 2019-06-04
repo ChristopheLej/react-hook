@@ -105,7 +105,7 @@ sh 'hostname'
 
               try {
                 sh 'echo try'
-                sh 'ls dist'
+                sh 'ls'
               } catch (error) {
                 sh 'echo catch'
               } finally {
