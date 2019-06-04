@@ -87,8 +87,10 @@ pipeline {
         script {
 sh 'echo "$USER"'
 sh 'whoami'
+sh 'hostname'
 
           docker.image('node:latest').withRun() { c ->
+            sh 'hostname'
             sh 'npm -v'
           }
 
