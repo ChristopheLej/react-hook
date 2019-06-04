@@ -108,6 +108,8 @@ sh 'hostname'
               sh 'ls dist'
             } catch (error) {
               sh 'echo catch'
+            } finally {
+              sh 'echo finally'
             }
             
           }
