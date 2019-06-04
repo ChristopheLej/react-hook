@@ -98,7 +98,7 @@ sh 'hostname'
 
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
-          docker.build("front:build", "-f dockerfile").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
+          docker.build("front:build", "-f dockerfile $workingPath").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
             sh 'ls'
             sh 'cd /app/build'
             sh 'ls'
