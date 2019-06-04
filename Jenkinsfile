@@ -98,7 +98,8 @@ sh 'hostname'
 
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
-          docker.build("front:build", "-f dockerfile $workingPath").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") {
+          docker.build("front:build", "-f dockerfile $workingPath").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
+            sh 'sleep time: 1, unit: ''MINUTES'''
             sh 'ls'
           }
           // image.inside("--net=host --user root -v /var/run/docker.sock:/var/run/docker.sock") { c->
