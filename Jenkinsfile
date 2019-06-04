@@ -99,7 +99,7 @@ sh 'hostname'
             sh 'ls'
             sh 'docker -v'
             def image = docker.build("front:build", "-f dockerfile $workingPath")
-            image.inside() {
+            image.inside {
               sh 'hostname'
               sh 'npm -v'
 
@@ -118,41 +118,41 @@ sh 'hostname'
       }
     }
 
-    stage ("Get URL") {
-      steps {
-				script {
-          echo "URL of the web is ${WebUrl}"
-          //printParams()
+    // stage ("Get URL") {
+    //   steps {
+		// 		script {
+    //       echo "URL of the web is ${WebUrl}"
+    //       //printParams()
 
-          def data = [
-            TF_VAR_BR_NAME: TF_VAR_BR_NAME,
-            SMARTER_EFF_BDD_USER: BDD_USER
-          ]
+    //       def data = [
+    //         TF_VAR_BR_NAME: TF_VAR_BR_NAME,
+    //         SMARTER_EFF_BDD_USER: BDD_USER
+    //       ]
 
-          input message: 'Finished using the web site? (Click "Proceed" to continue)'
-          def map = [Io: "1", Europa: "deux", Ganymed: "3"]
-          for (element in map) {
-              echo "${element.key} ${element.value}"
-          }
+    //       input message: 'Finished using the web site? (Click "Proceed" to continue)'
+    //       def map = [Io: "1", Europa: "deux", Ganymed: "3"]
+    //       for (element in map) {
+    //           echo "${element.key} ${element.value}"
+    //       }
 
 
-          sh "cd $workingPath && echo export foo=bar"
-          //sh "export TF_VAR_BR_NAME=`echo -n $TF_VAR_BR_NAME |base64 -w0`"
+    //       sh "cd $workingPath && echo export foo=bar"
+    //       //sh "export TF_VAR_BR_NAME=`echo -n $TF_VAR_BR_NAME |base64 -w0`"
 
-          for (kv in mapToList(data)) {
-            sh "export ${kv[0]}=`echo -n ${kv[1]} |base64 -w0`"
-          }
+    //       for (kv in mapToList(data)) {
+    //         sh "export ${kv[0]}=`echo -n ${kv[1]} |base64 -w0`"
+    //       }
 
-          // sh "envsubst <$workingPath/smarter-eff-secrets.yaml > $workingPath/smarter-eff-secrets-ok.yaml && cat $workingPath/smarter-eff-secrets-ok.yaml"
-          // for(elem in data) {
-          //   sh "export ${elem.key}=`echo -n ${elem.value} |base64 -w0`"
-          // }
+    //       // sh "envsubst <$workingPath/smarter-eff-secrets.yaml > $workingPath/smarter-eff-secrets-ok.yaml && cat $workingPath/smarter-eff-secrets-ok.yaml"
+    //       // for(elem in data) {
+    //       //   sh "export ${elem.key}=`echo -n ${elem.value} |base64 -w0`"
+    //       // }
 
-          printParams()
-        }
-      }
-    }
-  }
+    //       printParams()
+    //     }
+      // }
+    // }
+  // }
 }
 
 def dockerBuildOrUse(String image, String dockerFile, String buildFolder) {
