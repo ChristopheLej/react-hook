@@ -99,19 +99,20 @@ sh 'hostname'
             sh 'ls'
             sh 'docker -v'
             def image = docker.build("front:build", "-f dockerfile $workingPath")
-          }
-          image.inside() {
-            sh 'hostname'
-            sh 'npm -v'
+            image.inside() {
+              sh 'hostname'
+              sh 'npm -v'
 
-            try {
-              sh 'ls dist'
-            } catch (error) {
-              sh 'echo catch'
-            } finally {
-              sh 'echo finally'
+              try {
+                sh 'echo try'
+                sh 'ls dist'
+              } catch (error) {
+                sh 'echo catch'
+              } finally {
+                sh 'echo finally'
+              }
+              
             }
-            
           }
         }
       }
