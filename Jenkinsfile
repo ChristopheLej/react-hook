@@ -92,25 +92,29 @@ sh 'hostname'
           // docker.image('node:latest').withRun() { c ->
           //   sh 'hostname'
           //   sh 'npm -v'
+
+          //   sh 'cp '
           // }
 
 
-					def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
-          // def image = docker.build("front:build", "-f dockerfile $workingPath")
-          image.inside("--net=host --user root -v /var/run/docker.sock:/var/run/docker.sock") { c->
-            sh 'npm -v'
+					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
+          docker.build("front:build", "-f dockerfile $workingPath").inside() {
             sh 'ls'
-
-            // try {
-            //   sh 'echo try'
-            //   sh 'cd build && ls'
-            // } catch (error) {
-            //   sh 'echo catch'
-            // } finally {
-            //   sh 'echo finally'
-            // }
-            
           }
+          // image.inside("--net=host --user root -v /var/run/docker.sock:/var/run/docker.sock") { c->
+          //   sh 'npm -v'
+          //   sh 'ls'
+
+          //   // try {
+          //   //   sh 'echo try'
+          //   //   sh 'cd build && ls'
+          //   // } catch (error) {
+          //   //   sh 'echo catch'
+          //   // } finally {
+          //   //   sh 'echo finally'
+          //   // }
+            
+          // }
         }
       }
     }
