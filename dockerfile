@@ -1,6 +1,6 @@
 # base image
 # FROM node:10.15.0
-FROM node:latest as build-stage
+FROM node:latest
 
 # select working folder
 WORKDIR /app
