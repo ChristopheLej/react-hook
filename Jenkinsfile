@@ -103,7 +103,8 @@ sh 'hostname'
             try {
               sh 'echo try'
               sh 'ls /app/build'
-              error "Program failed, please read logs..."
+               throw new Exception("Throw to stop pipeline")
+               //error "Program failed, please read logs..."
             } catch (error) {
               sh 'echo catch'
             } finally {
