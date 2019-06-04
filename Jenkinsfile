@@ -104,7 +104,12 @@ sh 'hostname'
             sh 'hostname'
             sh 'npm -v'
 
-            sh 'ls dist'
+            try {
+              sh 'ls dist'
+            } catch (error) {
+              sh 'echo catch'
+            }
+            
           }
         }
       }
