@@ -99,21 +99,20 @@ sh 'hostname'
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
           docker.build("front:build", "-f dockerfile $workingPath").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
-            sh 'ls'
-            sh 'ls /app/build'
+          
+            try {
+              sh 'echo try'
+              sh 'ls /app/build'
+            } catch (error) {
+              sh 'echo catch'
+            } finally {
+              sh 'echo finally'
+            }
           }
           // image.inside("--net=host --user root -v /var/run/docker.sock:/var/run/docker.sock") { c->
           //   sh 'npm -v'
           //   sh 'ls'
 
-          //   // try {
-          //   //   sh 'echo try'
-          //   //   sh 'cd build && ls'
-          //   // } catch (error) {
-          //   //   sh 'echo catch'
-          //   // } finally {
-          //   //   sh 'echo finally'
-          //   // }
             
           // }
         }
