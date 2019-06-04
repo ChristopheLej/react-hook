@@ -96,16 +96,13 @@ sh 'hostname'
 
 
           dir (workingPath) {
-            sh 'ls'
-            sh 'docker -v'
             def image = docker.build("front:build", "-f dockerfile $workingPath")
             image.inside {
-              sh 'hostname'
               sh 'npm -v'
 
               try {
                 sh 'echo try'
-                sh 'ls'
+                sh 'cd build && ls'
               } catch (error) {
                 sh 'echo catch'
               } finally {
