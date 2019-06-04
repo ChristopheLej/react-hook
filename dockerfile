@@ -12,7 +12,7 @@ COPY package*.json /app/
 RUN npm install
 
 # copy apllication in working folder
-COPY ./ /app/
+COPY ./ /app/ 
 
 # build application
 RUN npm run build
