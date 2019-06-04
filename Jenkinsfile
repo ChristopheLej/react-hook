@@ -103,6 +103,7 @@ sh 'hostname'
             try {
               sh 'echo try'
               sh 'ls /app/build'
+              error "Program failed, please read logs..."
             } catch (error) {
               sh 'echo catch'
             } finally {
