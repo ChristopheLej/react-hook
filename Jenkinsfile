@@ -106,7 +106,7 @@ sh 'hostname'
                 sh 'ls /app/build'
               }
               timeout(time: 3, unit: 'MINUTES') {
-                sh "while test `-e filename.txt | wc -l` -ne 1 ; do sleep 30; echo .; done;"
+                sh "while test `test -e ${filename} | wc -l` -ne 1 ; do sleep 30; echo .; done;"
               }
               throw new Exception("Throw to stop pipeline")
                //error "Program failed, please read logs..."
