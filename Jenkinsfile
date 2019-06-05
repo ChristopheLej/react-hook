@@ -100,7 +100,7 @@ pipeline {
           sh 'ls ${WORKSPACE}'
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
-          docker.build("front:build", "-f deployment/web.dockerfile $workingPath").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
+          docker.build("front:build", "-f deployment/web.dockerfile ${WORKSPACE}").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
           
             try {
               sh 'echo try'
