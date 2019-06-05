@@ -96,7 +96,7 @@ pipeline {
           //   sh 'cp '
           // }
 
-          sh 'ls'
+          sh 'rm -rf ${WORKSPACE}/build'
           sh 'ls ${WORKSPACE}'
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
@@ -123,9 +123,9 @@ pipeline {
           }
 
           sh 'ls ${WORKSPACE}/build'
-          sh 'ls ${WORKSPACE}/static'
-          sh 'ls ${WORKSPACE}/static/css'
-          sh 'ls ${WORKSPACE}/static/js'
+          sh 'ls ${WORKSPACE}/build/static'
+          sh 'ls ${WORKSPACE}/build/static/css'
+          sh 'ls ${WORKSPACE}/build/static/js'
           // image.inside("--net=host --user root -v /var/run/docker.sock:/var/run/docker.sock") { c->
           //   sh 'npm -v'
           //   sh 'ls'
