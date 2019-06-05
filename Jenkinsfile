@@ -107,7 +107,14 @@ pipeline {
 
               def result = true
               if (result) {
+                sh 'echo change value of result'
                 result = false
+              }
+
+              if (result) {
+                sh 'echo result=true'
+              } else {
+                sh 'echo result=false'
               }
 
               sh 'echo ${result}'
