@@ -85,9 +85,9 @@ pipeline {
       // }
       steps {
         script {
-sh 'echo "$USER"'
-sh 'whoami'
-sh 'hostname'
+// sh 'echo "$USER"'
+// sh 'whoami'
+// sh 'hostname'
 
           // docker.image('node:latest').withRun() { c ->
           //   sh 'hostname'
@@ -96,19 +96,23 @@ sh 'hostname'
           //   sh 'cp '
           // }
 
+          sh 'ls'
+          sh 'ls ${WORKSPACE}'
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
           docker.build("front:build", "-f deployment/web.dockerfile $workingPath").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
           
             try {
               sh 'echo try'
+
+              sh 'cp /app/build/* ${WORKSPACE}/build'
               retry(3) {
                 sh 'ls /app/build'
               }
               timeout(time: 3, unit: 'MINUTES') {
                 sh "while test `test -e /app/build/${filename} && echo 1 || echo 0` -ne 1 ; do sleep 30; echo .; done;"
               }
-              throw new Exception("Throw to stop pipeline")
+              // throw new Exception("Throw to stop pipeline")
                //error "Program failed, please read logs..."
             } catch (error) {
               sh 'echo catch'
@@ -117,6 +121,9 @@ sh 'hostname'
               sh 'echo finally'
             }
           }
+
+          sh 'ls'
+          sh 'ls ${WORKSPACE}'
           // image.inside("--net=host --user root -v /var/run/docker.sock:/var/run/docker.sock") { c->
           //   sh 'npm -v'
           //   sh 'ls'
