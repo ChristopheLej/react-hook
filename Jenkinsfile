@@ -102,8 +102,13 @@ sh 'hostname'
           
             try {
               sh 'echo try'
-              sh 'ls /app/build'
-               throw new Exception("Throw to stop pipeline")
+              retry(3) {
+                sh 'ls /app/build'
+              }
+              timeout(time: 3, unit: 'MINUTES') {
+                sh "while test -e filename.txt | wc -l -ne 1 ; do sleep 30; echo .; done;"
+              }
+              throw new Exception("Throw to stop pipeline")
                //error "Program failed, please read logs..."
             } catch (error) {
               sh 'echo catch'
