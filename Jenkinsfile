@@ -107,7 +107,7 @@ pipeline {
 
               def result = true
               if (result) {
-                def result = false
+                result = false
               }
 
               sh 'echo ${result}'
