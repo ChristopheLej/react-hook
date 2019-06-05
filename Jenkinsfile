@@ -122,8 +122,10 @@ pipeline {
             }
           }
 
-          sh 'ls'
-          sh 'ls ${WORKSPACE}'
+          sh 'ls ${WORKSPACE}/build'
+          sh 'ls ${WORKSPACE}/static'
+          sh 'ls ${WORKSPACE}/static/css'
+          sh 'ls ${WORKSPACE}/static/js'
           // image.inside("--net=host --user root -v /var/run/docker.sock:/var/run/docker.sock") { c->
           //   sh 'npm -v'
           //   sh 'ls'
