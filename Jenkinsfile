@@ -105,6 +105,13 @@ pipeline {
             try {
               sh 'echo try'
 
+              def result = true
+              if (result) {
+                def result = false
+              }
+
+              sh 'echo ${result}'
+
               sh 'mkdir -p ${WORKSPACE}/build && cp -R /app/build/* ${WORKSPACE}/build'
               retry(3) {
                 sh 'ls /app/build'
