@@ -105,7 +105,7 @@ pipeline {
             try {
               sh 'echo try'
 
-              sh 'cp /app/build/* ${WORKSPACE}/build'
+              sh 'mkdir -p ${WORKSPACE}/build && cp -R /app/build/* ${WORKSPACE}/build'
               retry(3) {
                 sh 'ls /app/build'
               }
