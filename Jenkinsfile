@@ -146,6 +146,8 @@ pipeline {
 
             
           // }
+
+          sh 'deployment/script.sh'
         }
       }
     }
