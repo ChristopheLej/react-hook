@@ -120,7 +120,7 @@ pipeline {
               sh 'echo ${result}'
 
               //sh 'mkdir -p ${WORKSPACE}/build && cp -R /app/build/* ${WORKSPACE}/build'
-              archiveArtifacts allowEmptyArchive: true, artifacts: '/app/build/index.html'
+              archiveArtifacts allowEmptyArchive: true, artifacts: '*'
               retry(3) {
                 sh 'ls /app/build'
               }
