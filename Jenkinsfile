@@ -119,7 +119,8 @@ pipeline {
 
               sh 'echo ${result}'
 
-              sh 'mkdir -p ${WORKSPACE}/build && cp -R /app/build/* ${WORKSPACE}/build'
+              //sh 'mkdir -p ${WORKSPACE}/build && cp -R /app/build/* ${WORKSPACE}/build'
+              archiveArtifacts allowEmptyArchive: true, artifacts: '/app/build/*'
               retry(3) {
                 sh 'ls /app/build'
               }
@@ -147,7 +148,7 @@ pipeline {
             
           // }
 
-          archiveArtifacts allowEmptyArchive: true, artifacts: '/build/**/*', onlyIfSuccessful: true
+          
 
           sh 'deployment/script.sh'
         }
