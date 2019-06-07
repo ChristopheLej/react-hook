@@ -96,7 +96,7 @@ pipeline {
           //   sh 'cp '
           // }
 
-          sh 'rm -rf ${WORKSPACE}/build/web'
+          sh 'rm -rf ${WORKSPACE}/build'
           sh 'ls ${WORKSPACE}'
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
