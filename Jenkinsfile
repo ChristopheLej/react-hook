@@ -137,10 +137,10 @@ pipeline {
             }
           }
 
-          sh 'ls ${WORKSPACE}/build'
-          sh 'ls ${WORKSPACE}/build/static'
-          sh 'ls ${WORKSPACE}/build/static/css'
-          sh 'ls ${WORKSPACE}/build/static/js'
+          // sh 'ls ${WORKSPACE}/build'
+          // sh 'ls ${WORKSPACE}/build/static'
+          // sh 'ls ${WORKSPACE}/build/static/css'
+          // sh 'ls ${WORKSPACE}/build/static/js'
           // image.inside("--net=host --user root -v /var/run/docker.sock:/var/run/docker.sock") { c->
           //   sh 'npm -v'
           //   sh 'ls'
