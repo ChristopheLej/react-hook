@@ -147,6 +147,8 @@ pipeline {
             
           // }
 
+          archiveArtifacts allowEmptyArchive: true, artifacts: '/build/*', onlyIfSuccessful: true
+
           sh 'deployment/script.sh'
         }
       }
