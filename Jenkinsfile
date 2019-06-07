@@ -96,7 +96,7 @@ pipeline {
           //   sh 'cp '
           // }
 
-          sh 'rm -rf ${WORKSPACE}/build'
+          sh 'rm -rf ${WORKSPACE}/build/web'
           sh 'ls ${WORKSPACE}'
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
@@ -119,7 +119,7 @@ pipeline {
 
               sh 'echo ${result}'
 
-              sh 'mkdir -p ${WORKSPACE}/build && cp -R /app/build/* ${WORKSPACE}/build'
+              sh 'mkdir -p ${WORKSPACE}/build && cp -R /app/build/* ${WORKSPACE}/build/web'
               retry(3) {
                 sh 'ls /app/build'
               }
@@ -135,7 +135,7 @@ pipeline {
               sh 'echo finally'
             }
           }
-          
+
           archiveArtifacts allowEmptyArchive: true, artifacts: 'build/**/*'
 
           // sh 'ls ${WORKSPACE}/build'
