@@ -119,7 +119,7 @@ pipeline {
 
               sh 'echo ${result}'
 
-              sh 'mkdir -p ${WORKSPACE}/build && cp -R /app/build/* ${WORKSPACE}/build/web'
+              sh 'mkdir -p ${WORKSPACE}/build/web && cp -R /app/build/* ${WORKSPACE}/build/web'
               retry(3) {
                 sh 'ls /app/build'
               }
