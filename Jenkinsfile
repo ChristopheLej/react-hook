@@ -135,7 +135,8 @@ pipeline {
               sh 'echo finally'
             }
           }
-              archiveArtifacts allowEmptyArchive: true, artifacts: '**/*'
+          
+          archiveArtifacts allowEmptyArchive: true, artifacts: 'build/**/*'
 
           // sh 'ls ${WORKSPACE}/build'
           // sh 'ls ${WORKSPACE}/build/static'
