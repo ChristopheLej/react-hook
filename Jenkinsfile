@@ -99,9 +99,11 @@ pipeline {
           sh 'rm -rf ${WORKSPACE}/build'
           sh 'ls ${WORKSPACE}'
 
-          env.BR_NAME					= '${BRANCH_NAME}'.toLowerCase().replace('_','-').replace('.','-').replace('/','-')
+          env.BR_NAME					= "${BRANCH_NAME}".toLowerCase().replace('_','-').replace('.','-').replace('/','-')
 
           sh 'echo ${BR_NAME}'
+          sh "echo ${BR_NAME}"
+          sh 'echo env.BR_NAME'
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
           docker.build("front:build-${BR_NAME}", "-f deployment/web.dockerfile ${WORKSPACE}").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
