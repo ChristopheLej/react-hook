@@ -115,7 +115,6 @@ pipeline {
             } finally {
 
             }
-            sh "echo ${res}"
 
             try {
               res = 'Second try'
