@@ -240,7 +240,7 @@ def loadEnvironmentVariablesFromJson(path) {
   def config = readJSON file: path
   keys = config.keySet()
   for(key in keys) {
-    values = keys.keySet() 
+    values = key.keySet() 
     for(value in values) {
       env."${value}" = config["${value}"]
     }
