@@ -49,6 +49,9 @@ pipeline {
           echo props['version']
         }
 
+        loadEnvironmentVariables('deployment/dev.config.json')
+        sh 'printenv'
+
         configFileProvider([configFile(fileId:env.FILE_ID, variable:'CONFIG_FILE')]) {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
           script{
@@ -123,9 +126,6 @@ pipeline {
             } finally {
 
             }
-
-            sh "echo ${res}"
-
 
             try {
               sh 'echo try'
