@@ -56,13 +56,13 @@ pipeline {
           sh 'git clean -dfx'
         }
 
-        def files = findFiles(glob; 'deployment/dev.config.json')
+        def files = findFiles(glob: 'deployment/dev.config.json')
         if (files.lenght == 1) {
           sh "echo ${files[0].name} ${files[0].path} ${files[0].directory}"
           loadEnvironmentVariables('deployment/dev.config.json')
         }
 
-        files = findFiles(glob; 'deployment/dev.config.json1')
+        files = findFiles(glob: 'deployment/dev.config.json1')
         if (files.lenght == 1) {
           sh "echo ${files[0].name} ${files[0].path} ${files[0].directory}"
           loadEnvironmentVariables('deployment/dev.config.json')
