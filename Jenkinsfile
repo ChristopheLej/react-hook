@@ -56,7 +56,18 @@ pipeline {
           sh 'git clean -dfx'
         }
 
-        loadEnvironmentVariables('deployment/dev.config.json')
+        def files = findFiles(glob; 'deployment/dev.config.json')
+        if (files.lenght == 1) {
+          sh "echo ${files[0].name} ${files[0].path} ${files[0].directory}"
+          loadEnvironmentVariables('deployment/dev.config.json')
+        }
+
+        files = findFiles(glob; 'deployment/dev.config.json1')
+        if (files.lenght == 1) {
+          sh "echo ${files[0].name} ${files[0].path} ${files[0].directory}"
+          loadEnvironmentVariables('deployment/dev.config.json')
+        }
+
 
         configFileProvider([configFile(fileId:env.FILE_ID, variable:'CONFIG_FILE')]) {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
