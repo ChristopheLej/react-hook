@@ -51,10 +51,10 @@ pipeline {
         script {
           def props = readJSON file: 'package.json'
           echo props['version']
+        sh 'printenv'
         }
 
         loadEnvironmentVariablesFromJson('deployment/dev.config.json')
-        sh 'printenv'
 
         configFileProvider([configFile(fileId:env.FILE_ID, variable:'CONFIG_FILE')]) {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
