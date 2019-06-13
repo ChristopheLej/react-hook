@@ -112,7 +112,7 @@ pipeline {
 
           //   sh 'cp '
           // }
-          sh 'ls ${WORKSPACE}/build'
+          // sh 'ls ${WORKSPACE}/build'
 
           // sh 'rm -rf ${WORKSPACE}/build'
           // sh 'ls ${WORKSPACE}'
