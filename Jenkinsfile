@@ -114,8 +114,8 @@ pipeline {
           // }
           sh 'ls ${WORKSPACE}/build'
 
-          sh 'rm -rf ${WORKSPACE}/build'
-          sh 'ls ${WORKSPACE}'
+          // sh 'rm -rf ${WORKSPACE}/build'
+          // sh 'ls ${WORKSPACE}'
 
 
           sh 'echo ${BR_NAME}'
@@ -161,6 +161,11 @@ pipeline {
               sh 'ls'
               sh 'mkdir -p testExist'
               sh 'ls'
+
+
+              if ( fileExists('/app/build/index.html') ) {
+                sh 'echo file exist'
+              }
 
               sh 'mkdir -p ${WORKSPACE}/build/web && cp -R /app/build/* ${WORKSPACE}/build/web'
               retry(3) {
