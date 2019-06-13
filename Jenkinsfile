@@ -93,7 +93,7 @@ pipeline {
       // }
       steps {
         script {
-          sh 'printenv'
+          //sh 'printenv'
 // sh 'echo "$USER"'
 // sh 'whoami'
 // sh 'hostname'
