@@ -43,7 +43,7 @@ pipeline {
 
     stage ("Get source") {
       environment {
-        loadTerraformVariables()
+        TF_VAR_BR_NAME			= "${BR_NAME}"
       }
 
       steps {
@@ -149,6 +149,10 @@ pipeline {
 
               sh 'echo ${result}'
 
+              sh 'ls'
+              sh 'mkdir -p testExist'
+              sh 'ls'
+
               sh 'mkdir -p ${WORKSPACE}/build/web && cp -R /app/build/* ${WORKSPACE}/build/web'
               retry(3) {
                 sh 'ls /app/build'
@@ -221,10 +225,6 @@ pipeline {
       // }
     // }
   }
-}
-
-def loadTerraformVariables() {
-  TF_VAR_BR_NAME			= "${BR_NAME}"
 }
 
 def dockerBuildOrUse(String image, String dockerFile, String buildFolder) {
