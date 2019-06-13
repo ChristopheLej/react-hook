@@ -56,7 +56,7 @@ pipeline {
           sh 'git clean -dfx'
 
         def files = findFiles(glob: 'deployment/dev.config.json')
-        if (files.getLength() == 1) {
+        if (files.Length == 1) {
           sh "echo ${files[0].name} ${files[0].path} ${files[0].directory}"
           loadEnvironmentVariables('deployment/dev.config.json')
         }
