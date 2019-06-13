@@ -54,7 +54,6 @@ pipeline {
           // sh 'printenv'
 
           sh 'git clean -dfx'
-        }
 
         def files = findFiles(glob: 'deployment/dev.config.json')
         if (files.lenght == 1) {
@@ -68,6 +67,7 @@ pipeline {
           loadEnvironmentVariables('deployment/dev.config.json')
         }
 
+        }
 
         configFileProvider([configFile(fileId:env.FILE_ID, variable:'CONFIG_FILE')]) {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
