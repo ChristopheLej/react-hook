@@ -54,7 +54,7 @@ pipeline {
         sh 'printenv'
         }
 
-        loadEnvironmentVariablesFromJson('deployment/dev.config.json')
+        loadEnvironmentVariables('deployment/dev.config.json')
 
         configFileProvider([configFile(fileId:env.FILE_ID, variable:'CONFIG_FILE')]) {
           echo " =========== ^^^^^^^^^^^^ Reading config from pipeline script "
@@ -244,18 +244,6 @@ def loadEnvironmentVariables(path) {
     env."${key}" = config["${key}"]
   }
 }
-
-def loadEnvironmentVariablesFromJson(path) {
-  def config = readJSON file: path
-  keys = config.keySet()
-  for(key in keys) {
-    values = key.keySet() 
-    for(value in values) {
-      env."${value}" = config["${value}"]
-    }
-  }
-}
-
 
 def printParams() {
   env.getEnvironment().each { name, value -> println "$name: $value" }
