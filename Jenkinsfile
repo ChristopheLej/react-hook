@@ -35,7 +35,7 @@ pipeline {
           }
 
           env.workingPath = "${pwd()}"
-          env.BR_NAME					= "${BRANCH_NAME}".toLowerCase().replace('_','-').replace('.','-').replace('/','-')
+          BR_NAME					= "${BRANCH_NAME}".toLowerCase().replace('_','-').replace('.','-').replace('/','-')
 
         }
       }
