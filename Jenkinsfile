@@ -163,7 +163,7 @@ pipeline {
               sh 'ls'
 
 
-              if ( fileExists('/app/build/index.html') ) {
+              if ( fileExists('deployment/dev.config.json') ) {
                 sh 'echo file exist'
               }
 
