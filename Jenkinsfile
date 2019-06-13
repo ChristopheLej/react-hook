@@ -51,7 +51,9 @@ pipeline {
         script {
           def props = readJSON file: 'package.json'
           echo props['version']
-        sh 'printenv'
+          // sh 'printenv'
+
+          sh 'git clean -dfx'
         }
 
         loadEnvironmentVariables('deployment/dev.config.json')
