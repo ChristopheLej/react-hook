@@ -42,6 +42,10 @@ pipeline {
     }
 
     stage ("Get source") {
+      environment {
+        loadTerraformVariables()
+      }
+
       steps {
         // checkout scm
         script {
@@ -89,6 +93,7 @@ pipeline {
       // }
       steps {
         script {
+          sh 'printenv'
 // sh 'echo "$USER"'
 // sh 'whoami'
 // sh 'hostname'
@@ -216,6 +221,10 @@ pipeline {
       // }
     // }
   }
+}
+
+def loadTerraformVariables() {
+  TF_VAR_BR_NAME			= "${BR_NAME}"
 }
 
 def dockerBuildOrUse(String image, String dockerFile, String buildFolder) {
