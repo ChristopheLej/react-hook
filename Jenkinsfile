@@ -55,18 +55,13 @@ pipeline {
 
           sh 'git clean -dfx'
 
-        def files = findFiles(glob: 'deployment/dev.config.json')
-        if (files.Length == 1) {
-          sh "echo ${files[0].name} ${files[0].path} ${files[0].directory}"
+        if ( fileExists('deployment/dev.config.json') ) {
           loadEnvironmentVariables('deployment/dev.config.json')
         }
 
-        files = findFiles(glob: 'deployment/dev.config.json1')
-        if (files.Length == 1) {
-          sh "echo ${files[0].name} ${files[0].path} ${files[0].directory}"
-          loadEnvironmentVariables('deployment/dev.config.json')
+        if ( fileExists('deployment/dev.config.json1') ) {
+          loadEnvironmentVariables('deployment/dev.config.json1')
         }
-
         }
 
         configFileProvider([configFile(fileId:env.FILE_ID, variable:'CONFIG_FILE')]) {
