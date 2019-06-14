@@ -120,7 +120,7 @@ pipeline {
           // sh 'ls ${WORKSPACE}'
 
 
-          def K8S_NODE_COUNT = System.getenv("TF_VAR_K8S_NODE_COUNT") ?: 3
+          def K8S_NODE_COUNT = TF_VAR_K8S_NODE_COUNT != null ? TF_VAR_K8S_NODE_COUNT : 3
           sh "echo K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${K8S_NODE_COUNT}"
 
           TF_VAR_K8S_NODE_COUNT = "${TF_VAR_K8S_NODE_COUNT:3}"
