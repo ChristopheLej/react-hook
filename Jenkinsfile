@@ -51,9 +51,9 @@ pipeline {
 
         script {
           if ( "${params.Environment}" == "Development" ) {
-            loadEnvironmentVariables('deployment/dev.config.json')
+            loadEnvironmentVariables('deployment/configuration/dev.config.json')
           }
-          
+
           def props = readJSON file: 'package.json'
           echo props['version']
           sh 'printenv'
