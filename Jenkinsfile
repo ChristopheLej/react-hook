@@ -119,7 +119,7 @@ pipeline {
           // sh 'rm -rf ${WORKSPACE}/build'
           // sh 'ls ${WORKSPACE}'
 
-          echo "K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${TF_VAR_K8S_NODE_COUNT:3}"
+          echo "K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${${TF_VAR_K8S_NODE_COUNT}:3}"
 
           TF_VAR_K8S_NODE_COUNT = "${TF_VAR_K8S_NODE_COUNT:3}"
 
