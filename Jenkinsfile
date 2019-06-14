@@ -48,7 +48,7 @@ pipeline {
 
       steps {
         // checkout scm
-        if ( fileExists('deployment/dev.config.json') ) {
+        if ( "${params.Environment}" == "Development" ) {
           loadEnvironmentVariables('deployment/dev.config.json')
         }
 
