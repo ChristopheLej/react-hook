@@ -48,16 +48,17 @@ pipeline {
 
       steps {
         // checkout scm
-        script {
-          def props = readJSON file: 'package.json'
-          echo props['version']
-          // sh 'printenv'
-
-          sh 'git clean -dfx'
-
         if ( fileExists('deployment/dev.config.json') ) {
           loadEnvironmentVariables('deployment/dev.config.json')
         }
+
+        script {
+          def props = readJSON file: 'package.json'
+          echo props['version']
+          sh 'printenv'
+
+          sh 'git clean -dfx'
+
 
         if ( fileExists('deployment/dev.config.json1') ) {
           loadEnvironmentVariables('deployment/dev.config.json1')
