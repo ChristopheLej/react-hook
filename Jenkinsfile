@@ -48,11 +48,12 @@ pipeline {
 
       steps {
         // checkout scm
-        if ( "${params.Environment}" == "Development" ) {
-          loadEnvironmentVariables('deployment/dev.config.json')
-        }
 
         script {
+          if ( "${params.Environment}" == "Development" ) {
+            loadEnvironmentVariables('deployment/dev.config.json')
+          }
+          
           def props = readJSON file: 'package.json'
           echo props['version']
           sh 'printenv'
