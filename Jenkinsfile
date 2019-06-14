@@ -120,7 +120,7 @@ pipeline {
           // sh 'ls ${WORKSPACE}'
 
 
-          sh "echo K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${TF_VAR_K8S_NODE_COUNT:3}"
+          sh "echo K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${TF_VAR_K8S_NODE_COUNT:-3}"
 
           TF_VAR_K8S_NODE_COUNT = "${TF_VAR_K8S_NODE_COUNT:3}"
 
