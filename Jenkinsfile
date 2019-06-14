@@ -119,74 +119,77 @@ pipeline {
           // sh 'rm -rf ${WORKSPACE}/build'
           // sh 'ls ${WORKSPACE}'
 
-          echo "K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT}"
-          echo "K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT:3}"
+          echo "K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${TF_VAR_K8S_NODE_COUNT:3}"
+
+          TF_VAR_K8S_NODE_COUNT = ${TF_VAR_K8S_NODE_COUNT:3}
+
+          echo "K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${TF_VAR_K8S_NODE_COUNT:3}"
 
           sh 'echo ${BR_NAME}'
           sh "echo ${BR_NAME}"
           sh 'echo env.BR_NAME'
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
-          docker.build("front:build-${BR_NAME}", "-f deployment/web.dockerfile ${WORKSPACE}").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
+          // docker.build("front:build-${BR_NAME}", "-f deployment/web.dockerfile ${WORKSPACE}").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
 
-            try {
-              def res = 'First try'
-              sh "echo ${res}"
+          //   try {
+          //     def res = 'First try'
+          //     sh "echo ${res}"
 
-            } finally {
+          //   } finally {
 
-            }
+          //   }
 
-            try {
-              def res = 'Second try'
-              sh "echo ${res}"
+          //   try {
+          //     def res = 'Second try'
+          //     sh "echo ${res}"
 
-            } finally {
+          //   } finally {
 
-            }
+          //   }
 
-            try {
-              sh 'echo try'
+          //   try {
+          //     sh 'echo try'
 
-              def result = true
-              if (result) {
-                sh 'echo change value of result'
-                result = false
-              }
+          //     def result = true
+          //     if (result) {
+          //       sh 'echo change value of result'
+          //       result = false
+          //     }
 
-              if (result) {
-                sh 'echo result=true'
-              } else {
-                sh 'echo result=false'
-              }
+          //     if (result) {
+          //       sh 'echo result=true'
+          //     } else {
+          //       sh 'echo result=false'
+          //     }
 
-              sh 'echo ${result}'
+          //     sh 'echo ${result}'
 
-              sh 'ls'
-              sh 'mkdir -p testExist'
-              sh 'ls'
+          //     sh 'ls'
+          //     sh 'mkdir -p testExist'
+          //     sh 'ls'
 
 
-              if ( fileExists('deployment/dev.config.json') ) {
-                sh 'echo file exist'
-              }
+          //     if ( fileExists('deployment/dev.config.json') ) {
+          //       sh 'echo file exist'
+          //     }
 
-              sh 'mkdir -p ${WORKSPACE}/build/web && cp -R /app/build/* ${WORKSPACE}/build/web'
-              retry(3) {
-                sh 'ls /app/build'
-              }
-              timeout(time: 3, unit: 'MINUTES') {
-                sh "while test `test -e /app/build/${filename} && echo 1 || echo 0` -ne 1 ; do sleep 30; echo .; done;"
-              }
-              // throw new Exception("Throw to stop pipeline")
-               //error "Program failed, please read logs..."
-            } catch (error) {
-              sh 'echo catch'
-              currentBuild.result = "FAILURE"
-            } finally {
-              sh 'echo finally'
-            }
-          }
+          //     sh 'mkdir -p ${WORKSPACE}/build/web && cp -R /app/build/* ${WORKSPACE}/build/web'
+          //     retry(3) {
+          //       sh 'ls /app/build'
+          //     }
+          //     timeout(time: 3, unit: 'MINUTES') {
+          //       sh "while test `test -e /app/build/${filename} && echo 1 || echo 0` -ne 1 ; do sleep 30; echo .; done;"
+          //     }
+          //     // throw new Exception("Throw to stop pipeline")
+          //      //error "Program failed, please read logs..."
+          //   } catch (error) {
+          //     sh 'echo catch'
+          //     currentBuild.result = "FAILURE"
+          //   } finally {
+          //     sh 'echo finally'
+          //   }
+          // }
 
           archiveArtifacts allowEmptyArchive: true, artifacts: 'build/**/*'
 
