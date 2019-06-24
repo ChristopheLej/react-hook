@@ -124,7 +124,7 @@ pipeline {
           sh "echo K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${K8S_NODE_COUNT}"
 
           if (K8S_NODE_COUNT != ""){
-            sh "echo K8S_NODE_COUNT is '''not''' null"
+            sh "echo K8S_NODE_COUNT is \'not\' null"
           }
 
           TF_VAR_K8S_NODE_COUNT = "${TF_VAR_K8S_NODE_COUNT:3}"
