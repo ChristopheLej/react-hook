@@ -125,7 +125,7 @@ pipeline {
 
           if (K8S_NODE_COUNT != ""){
             def K8S_TEST = "1234="
-            sh "echo ${K8S_TEST}"
+            sh "$toto=${K8S_TEST} && echo ${toto}"
           }
 
           TF_VAR_K8S_NODE_COUNT = "${TF_VAR_K8S_NODE_COUNT:3}"
