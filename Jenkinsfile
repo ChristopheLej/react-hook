@@ -123,6 +123,10 @@ pipeline {
           def K8S_NODE_COUNT = TF_VAR_K8S_NODE_COUNT != null ? TF_VAR_K8S_NODE_COUNT : 3
           sh "echo K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${K8S_NODE_COUNT}"
 
+          if (K8S_NODE_COUNT != ""){
+            echo 'K8S_NODE_COUNT is not null'
+          }
+
           TF_VAR_K8S_NODE_COUNT = "${TF_VAR_K8S_NODE_COUNT:3}"
 
           echo "K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${TF_VAR_K8S_NODE_COUNT:3}"
