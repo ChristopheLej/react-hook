@@ -124,7 +124,7 @@ pipeline {
           sh "echo K8S_NODE_COUNT : ${TF_VAR_K8S_NODE_COUNT} , ${K8S_NODE_COUNT}"
 
           if (K8S_NODE_COUNT != ""){
-            sh "echo K8S_TEST=1234= && echo ${K8S_TEST}"
+            sh "def K8S_TEST=1234= && echo ${K8S_TEST}"
           }
 
           TF_VAR_K8S_NODE_COUNT = "${TF_VAR_K8S_NODE_COUNT:3}"
