@@ -39,7 +39,8 @@ pipeline {
           env.workingPath = "${pwd()}"
           BR_NAME					= "${BRANCH_NAME}".toLowerCase().replace('_','-').replace('.','-').replace('/','-')
 
-          sh "echo ${params.Certificate.key}"
+          sh "echo ${params.Certificate_USR}"
+          sh "echo ${params.Certificate_PSW}"
 
 
           // withCredentials(bindings: [certificate(aliasVariable: '', \
