@@ -39,6 +39,8 @@ pipeline {
           env.workingPath = "${pwd()}"
           BR_NAME					= "${BRANCH_NAME}".toLowerCase().replace('_','-').replace('.','-').replace('/','-')
 
+          sh "echo ${params.Certificate}"
+
 
           // withCredentials(bindings: [certificate(aliasVariable: '', \
           //                                       credentialsId: 'jenkins-certificate-for-xyz', \
