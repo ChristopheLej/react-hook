@@ -41,6 +41,7 @@ pipeline {
 
           sh "echo ${params.Certificate_USR}"
           sh "echo ${params.Certificate_PSW}"
+          sh "echo ${params.Certificate_PFX}"
 
 
           // withCredentials(bindings: [certificate(aliasVariable: '', \
