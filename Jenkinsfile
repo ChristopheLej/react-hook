@@ -6,7 +6,7 @@ pipeline {
             choices: ['Development', 'Production'], 
             description: 'Choose the environment')
 
-	  credentialParam( name: 'Certificate',
+	  credentials( name: 'Certificate',
                  description: 'Name of K8s cluster where the application should be deployed' )
 	}
 
