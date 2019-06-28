@@ -5,8 +5,9 @@ pipeline {
 	 	choice( name: 'Environment', 
             choices: ['Development', 'Production'], 
             description: 'Choose the environment')
-	 
 
+	  certificate( name: 'Certificate',
+                 description: 'Name of K8s cluster where the application should be deployed' )
 	}
 
   environment {
@@ -36,6 +37,16 @@ pipeline {
 
           env.workingPath = "${pwd()}"
           BR_NAME					= "${BRANCH_NAME}".toLowerCase().replace('_','-').replace('.','-').replace('/','-')
+
+
+          // withCredentials(bindings: [certificate(aliasVariable: '', \
+          //                                       credentialsId: 'jenkins-certificate-for-xyz', \
+          //                                       keystoreVariable: 'CERTIFICATE_FOR_XYZ', \
+          //                                       passwordVariable: 'XYZ-CERTIFICATE-PASSWORD')]) {
+          //   // some block
+          // }          CERTIFICATE = credentials("https-certificate")
+
+
 
         }
       }
