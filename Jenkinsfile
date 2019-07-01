@@ -39,9 +39,7 @@ pipeline {
           env.workingPath = "${pwd()}"
           BR_NAME					= "${BRANCH_NAME}".toLowerCase().replace('_','-').replace('.','-').replace('/','-')
 
-          sh "echo ${params.Certificate_USR}"
-          sh "echo ${params.Certificate_PSW}"
-          sh "echo ${params.Certificate_PFX}"
+          sh "openssl pkcs12 -in ${params.Certificate} -out tls.crt -clcerts -nokeys"
 
 
           // withCredentials(bindings: [certificate(aliasVariable: '', \
