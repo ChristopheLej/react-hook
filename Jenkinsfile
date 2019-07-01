@@ -39,7 +39,8 @@ pipeline {
           env.workingPath = "${pwd()}"
           BR_NAME					= "${BRANCH_NAME}".toLowerCase().replace('_','-').replace('.','-').replace('/','-')
 
-          sh "openssl pkcs12 -in ${params.Certificate} -out tls.crt -clcerts -nokeys"
+sh "keytool -import -trustcacerts -alias awsJenkinsCert -file ${params.Certificate} -keystore $JAVA_HOME/jre/lib/security/cacerts"
+          // sh "openssl pkcs12 -in ${params.Certificate} -out tls.crt -clcerts -nokeys"
 
 
           // withCredentials(bindings: [certificate(aliasVariable: '', \
