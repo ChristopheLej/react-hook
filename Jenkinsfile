@@ -7,7 +7,7 @@ pipeline {
             description: 'Choose the environment')
 
 	  credentials( name: 'Certificate',
-                 credentialType: "Certificate",
+                 credentialType: "CertificateCredentials",
                  description: 'Name of K8s cluster where the application should be deployed' )
 	}
 
