@@ -2,6 +2,8 @@
 # FROM node:10.15.0
 FROM node:latest
 
+ARG KEY_FOLDER
+
 # select working folder
 WORKDIR /app
 
@@ -12,7 +14,13 @@ COPY package*.json /app/
 RUN npm install
 
 # copy apllication in working folder
-COPY ./ /app/ 
+COPY ./ /app/
+
+RUN mkdir -p /tmp
+
+
+COPY ${KEY_FOLDER}/* /tmp
+
 
 # build application
 RUN npm run build

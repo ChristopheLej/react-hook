@@ -39,16 +39,16 @@ pipeline {
           env.workingPath = "${pwd()}"
           BR_NAME					= "${BRANCH_NAME}".toLowerCase().replace('_','-').replace('.','-').replace('/','-')
 
-sh "keytool -import -trustcacerts -alias awsJenkinsCert -file ${params.Certificate} -keystore $JAVA_HOME/jre/lib/security/cacerts"
-          // sh "openssl pkcs12 -in ${params.Certificate} -out tls.crt -clcerts -nokeys"
+// sh "keytool -import -trustcacerts -alias awsJenkinsCert -file ${params.Certificate} -keystore $JAVA_HOME/jre/lib/security/cacerts"
+//           // sh "openssl pkcs12 -in ${params.Certificate} -out tls.crt -clcerts -nokeys"
 
 
-          // withCredentials(bindings: [certificate(aliasVariable: '', \
-          //                                       credentialsId: 'jenkins-certificate-for-xyz', \
-          //                                       keystoreVariable: 'CERTIFICATE_FOR_XYZ', \
-          //                                       passwordVariable: 'XYZ-CERTIFICATE-PASSWORD')]) {
-          //   // some block
-          // }          CERTIFICATE = credentials("https-certificate")
+//           withCredentials(bindings: [ certificate(aliasVariable: '', \
+//                                       credentialsId: 'jenkins-certificate-for-xyz', \
+//                                       keystoreVariable: 'CERTIFICATE_FOR_XYZ', \
+//                                       passwordVariable: 'XYZ-CERTIFICATE-PASSWORD')]) {
+//             // some block
+//           }          CERTIFICATE = credentials("https-certificate")
 
 
 
@@ -152,7 +152,7 @@ sh "keytool -import -trustcacerts -alias awsJenkinsCert -file ${params.Certifica
           sh 'echo env.BR_NAME'
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
-          // docker.build("front:build-${BR_NAME}", "-f deployment/web.dockerfile ${WORKSPACE}").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
+          docker.build("front:build-${BR_NAME}", "-f deployment/web.dockerfile ${WORKSPACE} --build-arg KEY_FOLDER=deployment/configuration}").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
 
           //   try {
           //     def res = 'First try'
@@ -211,7 +211,7 @@ sh "keytool -import -trustcacerts -alias awsJenkinsCert -file ${params.Certifica
           //   } finally {
           //     sh 'echo finally'
           //   }
-          // }
+          }
 
           archiveArtifacts allowEmptyArchive: true, artifacts: 'build/**/*'
 
