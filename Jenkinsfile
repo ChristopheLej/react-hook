@@ -152,7 +152,7 @@ pipeline {
           sh 'echo env.BR_NAME'
 
 					//def image = dockerBuildOrUse("front", "$workingPath/dockerfile", workingPath)
-          docker.build("front:build-${BR_NAME}", "-f deployment/web.dockerfile ${WORKSPACE} --build-arg KEY_FOLDER=deployment").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
+          docker.build("front:build-${BR_NAME}", "-f deployment/web.dockerfile ${WORKSPACE} --build-arg KEY_FOLDER=deployment/configuration").inside("--net=host -v /var/run/docker.sock:/var/run/docker.sock") { c->
 
           //   try {
           //     def res = 'First try'

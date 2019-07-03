@@ -23,6 +23,8 @@ RUN echo "Oh dang look at that ${KEY_FOLDER}"
 
 COPY ${KEY_FOLDER}/* /tmp
 
+RUN ls /tmp
+
 
 # build application
 RUN npm run build
