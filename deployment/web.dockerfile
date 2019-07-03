@@ -18,6 +18,8 @@ COPY ./ /app/
 
 RUN mkdir -p /tmp
 
+RUN echo "Oh dang look at that $KEY_FOLDER"
+RUN echo "Oh dang look at that ${KEY_FOLDER}"
 
 COPY ${KEY_FOLDER}/* /tmp
 
