@@ -17,7 +17,7 @@ pipeline {
 				script {
           echo "Your choice is: ${params.Environment}"
 
-          sh "git branch -D ${params.Target}"
+          sh "git fetch && git branch -a"
 
         }
       }
