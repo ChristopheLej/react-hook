@@ -17,7 +17,7 @@ pipeline {
 				script {
           echo "Your choice is: ${params.Environment}"
 
-          sh "git fetch && git branch -a && git push ${params.Target} --delete ${params.Target}"
+          sh "git fetch && git branch -a && git push origin --delete ${params.Target}"
 
         }
       }
