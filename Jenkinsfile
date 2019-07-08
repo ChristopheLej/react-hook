@@ -8,10 +8,6 @@ pipeline {
 
 	}
 
-  environment {
-
-	}
-
 
   stages {
 		stage ("Init") {
