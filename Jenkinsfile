@@ -17,7 +17,7 @@ pipeline {
 				script {
           echo "Your choice is: ${params.Environment}"
 
-          echo "CHANGE_AUTHOR : ${CHANGE_AUTHOR}"
+          echo "CHANGE_AUTHOR : ${env.CHANGE_AUTHOR}"
 
           sh "git fetch && git branch -a && git push origin --delete ${params.Target}"
 
