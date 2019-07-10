@@ -19,9 +19,9 @@ pipeline {
 
           echo "CHANGE_AUTHOR : ${env.CHANGE_AUTHOR}"
 
-          sh "echo ${TF_VAR_K8S_NODE_COUNT}"
+          sh "echo ${env.TF_VAR_K8S_NODE_COUNT}"
 
-          def K8S_NODE_COUNT = TF_VAR_K8S_NODE_COUNT != null ? TF_VAR_K8S_NODE_COUNT : 3
+          def K8S_NODE_COUNT = env.TF_VAR_K8S_NODE_COUNT != null ? env.TF_VAR_K8S_NODE_COUNT : 3
           
           sh "echo ${K8S_NODE_COUNT}"
         }
