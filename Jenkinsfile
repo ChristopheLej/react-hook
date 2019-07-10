@@ -19,8 +19,9 @@ pipeline {
 
           echo "CHANGE_AUTHOR : ${env.CHANGE_AUTHOR}"
 
-          sh "git fetch && git branch -a && git push origin --delete ${params.Target}"
-
+          def K8S_NODE_COUNT = TF_VAR_K8S_NODE_COUNT != null ? TF_VAR_K8S_NODE_COUNT : 3
+          
+          sh "echo ${K8S_NODE_COUNT}"
         }
       }
     }
