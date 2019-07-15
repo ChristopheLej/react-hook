@@ -28,6 +28,17 @@ pipeline {
       }
     }
 
+		stage ("Sample") {
+			steps {
+				script {
+          def ex =['sh','-c','ps -aef | grep Xmx']
+          String str =  ex.execute().text
+
+          echo $str
+        }
+      }
+    }
+
 
   }
 }
