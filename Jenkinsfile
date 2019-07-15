@@ -31,10 +31,11 @@ pipeline {
 		stage ("Sample") {
 			steps {
 				script {
-          def ex =['sh','-c','ps -aef | grep Xmx']
-          String str =  ex.execute().text
+          def url = '822550480227.dkr.ecr.eu-west-1.amazonaws.com/smarter-eff'
+          echo url
 
-          echo $str
+          def afterLastSlash = url.substring(url.lastIndexOf('/') + 1, url.length())
+          echo afterLastSlash
         }
       }
     }
