@@ -40,8 +40,8 @@ pipeline {
           def afterLastSlash = url.substring(url.lastIndexOf('/') + 1, url.length())
           echo afterLastSlash
 
-          cmd.replace('#REPO#', url.substring(url.lastIndexOf('/') + 1, url.length()))
-          echo cmd
+          def command = cmd.replace('#REPO#', url.substring(url.lastIndexOf('/') + 1, url.length()))
+          echo command
         }
       }
     }
