@@ -31,11 +31,17 @@ pipeline {
 		stage ("Sample") {
 			steps {
 				script {
+          def cmd = 'aws ecr list-images --repository-name=#REPO# --filter tagStatus=TAGGED'
+
+
           def url = '822550480227.dkr.ecr.eu-west-1.amazonaws.com/smarter-eff'
           echo url
 
           def afterLastSlash = url.substring(url.lastIndexOf('/') + 1, url.length())
           echo afterLastSlash
+
+          cmd.replace('#REPO#', url.substring(url.lastIndexOf('/') + 1, url.length()))
+          echo cmd
         }
       }
     }
