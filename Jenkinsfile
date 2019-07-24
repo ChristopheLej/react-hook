@@ -31,17 +31,10 @@ pipeline {
 		stage ("Sample") {
 			steps {
 				script {
-          def cmd = 'aws ecr list-images --repository-name=#REPO# --filter tagStatus=TAGGED'
-
-
-          def url = '822550480227.dkr.ecr.eu-west-1.amazonaws.com/smarter-eff'
-          echo url
-
-          def afterLastSlash = url.substring(url.lastIndexOf('/') + 1, url.length())
-          echo afterLastSlash
-
-          def command = cmd.replace('#REPO#', url.substring(url.lastIndexOf('/') + 1, url.length()))
-          echo command
+          echo_all(abcs)
+          loop_of_sh(abcs)
+          loop_with_preceding_sh(abcs)
+          traditional_int_for_loop(abcs)
         }
       }
     }
@@ -50,3 +43,36 @@ pipeline {
   }
 }
 
+@NonCPS // has to be NonCPS or the build breaks on the call to .each
+def echo_all(list) {
+    list.each { item ->
+        echo "Hello ${item}"
+    }
+}
+// outputs all items as expected
+
+@NonCPS
+def loop_of_sh(list) {
+    list.each { item ->
+        sh "echo Hello ${item}"
+    }
+}
+// outputs only the first item
+
+@NonCPS
+def loop_with_preceding_sh(list) {
+    sh "echo Going to echo a list"
+    list.each { item ->
+        sh "echo Hello ${item}"
+    }
+}
+// outputs only the "Going to echo a list" bit
+
+//No NonCPS required
+def traditional_int_for_loop(list) {
+    sh "echo Going to echo a list"
+    for (int i = 0; i < list.size(); i++) {
+        sh "echo Hello ${list[i]}"
+    }
+}
+// echoes everything as expected
