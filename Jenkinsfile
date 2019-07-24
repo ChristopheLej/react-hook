@@ -31,6 +31,7 @@ pipeline {
 		stage ("Sample") {
 			steps {
 				script {
+          abcs = ['a', 'b', 'c']
           echo_all(abcs)
           loop_of_sh(abcs)
           loop_with_preceding_sh(abcs)
