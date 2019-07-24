@@ -32,9 +32,13 @@ pipeline {
 			steps {
 				script {
           abcs = ['a', 'b', 'c']
+						echo "************** echo_all ***************"
           echo_all(abcs)
-          loop_of_sh(abcs)
+ 						echo "************** loop_of_sh ***************"
+         loop_of_sh(abcs)
+						echo "************** loop_with_preceding_sh ***************"
           loop_with_preceding_sh(abcs)
+						echo "************** traditional_int_for_loop ***************"
           traditional_int_for_loop(abcs)
         }
       }
