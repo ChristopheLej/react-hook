@@ -10,11 +10,20 @@ pipeline {
 		        description: 'Name of K8s cluster where the application should be deployed' )
 	}
 
+  environment {
+    CREDENTIALS_AWS = credentials("DISPATCHPLUS_AWS_DEV");
+
+    AWS_REGION = "eu-west-1"
+  }
+
 
   stages {
 		stage ("Init") {
 			steps {
 				script {
+					env.AWS_ACCESS_KEY_ID			= "${CREDENTIALS_AWS_USR}"
+					env.AWS_SECRET_ACCESS_KEY	= "${CREDENTIALS_AWS_PSW}"
+
           echo "Your choice is: ${params.Environment}"
 
           echo "CHANGE_AUTHOR : ${env.CHANGE_AUTHOR}"
@@ -25,7 +34,11 @@ pipeline {
           
           sh "echo ${K8S_NODE_COUNT}"
 
-          Say(Hello)
+          Say('Hello')
+
+          SayWorld('World')
+
+          sh "id"
         }
       }
     }
@@ -42,9 +55,38 @@ pipeline {
           traditional_int_for_loop(abcs)
 						echo "************** echo_all ***************"
           echo_all(abcs)
+
+
+          sh "ls -l > airlines.txt"
+
+          sh "cat airlines.txt"
         }
       }
     }
+
+		// stage ("test") {
+		// 	steps {
+		// 		script {
+
+		// 			docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
+		// 			.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
+
+    //       sh 'id'
+          
+    //       sh 'ls /var/run/docker.sock'
+
+    //       // sh "chown -R 1009 /var/run/docker.sock"
+
+    //       //sudo chmod 666 /var/run/docker.sock
+
+
+    //       login()
+
+    //       ech 'OK Login'
+    //     }
+    //   }
+    // }
+  // }
 
 
   }
@@ -92,3 +134,8 @@ def traditional_int_for_loop(list) {
     }
 }
 // echoes everything as expected
+
+def login()
+{
+	sh "\$(aws ecr get-login --no-include-email --region ${env.AWS_REGION})"
+}
