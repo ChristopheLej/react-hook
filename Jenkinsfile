@@ -24,6 +24,8 @@ pipeline {
           def K8S_NODE_COUNT = env.TF_VAR_K8S_NODE_COUNT != null ? env.TF_VAR_K8S_NODE_COUNT : 3
           
           sh "echo ${K8S_NODE_COUNT}"
+
+          Say(Hello)
         }
       }
     }
@@ -47,6 +49,15 @@ pipeline {
 
   }
 }
+
+def Say(String msg, String name='') {
+  sh "echo ${msg} ${name}!"
+}
+
+def SayWorld(String name) {
+  Say('Hello', "${name}")
+}
+
 
 @NonCPS // has to be NonCPS or the build breaks on the call to .each
 def echo_all(list) {
