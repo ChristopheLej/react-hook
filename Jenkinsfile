@@ -72,7 +72,7 @@ pipeline {
 					docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
 					.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
 
-            while {
+            while (true) {
               def userInput = input(
                   id: 'userInput', message: 'Enter a command', parameters: [
                       [
