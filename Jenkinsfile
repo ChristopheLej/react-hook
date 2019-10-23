@@ -8,6 +8,11 @@ pipeline {
     
     string( name: 'Target', defaultValue: env.BRANCH_NAME,
 		        description: 'Name of K8s cluster where the application should be deployed' )
+
+    text( name: 'cmd01')
+    text( name: 'cmd02')
+    text( name: 'cmd03')
+
 	}
 
   environment {
@@ -63,6 +68,47 @@ pipeline {
         }
       }
     }
+
+
+    stage ("Command01") {
+      steps {
+        script {
+					docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
+					.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
+
+            sh "echo ${param.cmd01}"
+          }
+        }
+      }
+    }
+
+        stage ("Command02") {
+      steps {
+        script {
+					docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
+					.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
+
+            sh "echo ${param.cmd02}"
+          }
+        }
+      }
+    }
+
+
+
+    stage ("Command03") {
+      steps {
+        script {
+					docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
+					.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
+
+            sh "echo ${param.cmd03}"
+          }
+        }
+      }
+    }
+
+
 
 		// stage ("test") {
 		// 	steps {
