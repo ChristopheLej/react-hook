@@ -76,19 +76,19 @@ pipeline {
 					docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
 					.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
 
-            sh "echo ${param.cmd01}"
+            sh "echo ${params.cmd01}"
           }
         }
       }
     }
 
-        stage ("Command02") {
+    stage ("Command02") {
       steps {
         script {
 					docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
 					.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
 
-            sh "echo ${param.cmd02}"
+            sh "echo ${params.cmd02}"
           }
         }
       }
@@ -102,7 +102,7 @@ pipeline {
 					docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
 					.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
 
-            sh "echo ${param.cmd03}"
+            sh "echo ${params.cmd03}"
           }
         }
       }
