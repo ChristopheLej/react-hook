@@ -44,26 +44,23 @@ pipeline {
       }
     }
 
-		stage ("Sample") {
-			steps {
-				script {
-          abcs = ['a', 'b', 'c']
- 						echo "************** loop_of_sh ***************"
-         loop_of_sh(abcs)
-						echo "************** loop_with_preceding_sh ***************"
-          loop_with_preceding_sh(abcs)
-						echo "************** traditional_int_for_loop ***************"
-          traditional_int_for_loop(abcs)
-						echo "************** echo_all ***************"
-          echo_all(abcs)
-
-
-          sh "ls -l > airlines.txt"
-
-          sh "cat airlines.txt"
-        }
-      }
-    }
+		// stage ("Sample") {
+		// 	steps {
+		// 		script {
+    //       abcs = ['a', 'b', 'c']
+ 		// 				echo "************** loop_of_sh ***************"
+    //      loop_of_sh(abcs)
+		// 				echo "************** loop_with_preceding_sh ***************"
+    //       loop_with_preceding_sh(abcs)
+		// 				echo "************** traditional_int_for_loop ***************"
+    //       traditional_int_for_loop(abcs)
+		// 				echo "************** echo_all ***************"
+    //       echo_all(abcs)
+    //       sh "ls -l > airlines.txt"
+    //       sh "cat airlines.txt"
+    //     }
+    //   }
+    // }
 
 
     stage ("Command") {
@@ -74,13 +71,13 @@ pipeline {
 
             env.DNS_ZONE = "dispatchplus.gfinav.net"
 
-            def CERT_KEY = sh(script:"(for WCERTARN in \$(aws acm list-certificates | jq -r --arg DNS \"*.${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == $DNS) | .CertificateArn') \
-                                      do \
-                                        echo 'test' \
-                                      done \
-                                      )", returnStdout: true).trim()
+            // def CERT_KEY = sh(script:"(for WCERTARN in \$(aws acm list-certificates | jq -r --arg DNS \"*.${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == $DNS) | .CertificateArn') \
+            //                           do \
+            //                             echo 'test' \
+            //                           done \
+            //                           )", returnStdout: true).trim()
 
-            echo "CERT_KEY=${CERT_KEY}"
+            echo "CERT_KEY=${DNS_ZONE}"
           
 
           }
