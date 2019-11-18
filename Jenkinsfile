@@ -70,13 +70,14 @@ pipeline {
 					.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
 
             env.DNS_ZONE = "dispatchplus.gfinav.net"
+            AWS_REGION = "eu-west-1"
 
-            def a = sh(script: "aws acm list-certificates --region eu-west-1 | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'", returnStdout: true).trim() 
+            def a = sh(script: "aws acm list-certificates --region \${AWS_REGION} | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'", returnStdout: true).trim() 
             echo "a=${a}"
 
-            def CERT_KEY = sh(script:"(for WCERTARN in \$(aws acm list-certificates --region eu-west-1 | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'); \
+            def CERT_KEY = sh(script:"(for WCERTARN in \$(aws acm list-certificates --region \${AWS_REGION} | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'); \
                                       do \
-                                        aws acm describe-certificate --region eu-west-1 --certificate-arn \"\${WCERTARN}\" | jq -r '.Certificate | \"\\(.NotAfter) \\(.CertificateArn)\"'; \
+                                        aws acm describe-certificate --region \${AWS_REGION} --certificate-arn \"\${WCERTARN}\" | jq -r '.Certificate | \"\\(.NotAfter) \\(.CertificateArn)\"'; \
                                       done) | sort | tail -1 | awk '{print \$2}'", returnStdout: true).trim()
 
             echo "CERT_KEY=${CERT_KEY}"
