@@ -72,6 +72,8 @@ pipeline {
 					docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
 					.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
 
+            env.DNS_ZONE = "dispatchplus.gfinav.net"
+
             def CERT_KEY = sh(script:"(for WCERTARN in \$(aws acm list-certificates | jq -r --arg DNS \"*.${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == $DNS) | .CertificateArn') \
                                       do \
                                         echo 'test' \
