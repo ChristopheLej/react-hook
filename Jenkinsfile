@@ -71,6 +71,8 @@ pipeline {
 
             env.DNS_ZONE = "dispatchplus.gfinav.net"
 
+            sh(script: "aws acm list-certificates | jq -r --arg DNS \"*.${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == $DNS) | .CertificateArn'", returnStdout: true).trim() 
+
             // def CERT_KEY = sh(script:"(for WCERTARN in \$(aws acm list-certificates | jq -r --arg DNS \"*.${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == $DNS) | .CertificateArn') \
             //                           do \
             //                             echo 'test' \
