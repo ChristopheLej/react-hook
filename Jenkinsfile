@@ -74,13 +74,10 @@ pipeline {
             def a = sh(script: "aws acm list-certificates --region eu-west-1 | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'", returnStdout: true).trim() 
             echo "a=${a}"
 
-            def CERT_KEY = sh(script:"for WCERTARN in \$(aws acm list-certificates --region eu-west-1 | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'); \
+            def CERT_KEY = sh(script:"(for WCERTARN in \$(aws acm list-certificates --region eu-west-1 | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'); \
                                       do \
                                         aws acm describe-certificate --region eu-west-1 --certificate-arn \"\${WCERTARN}\" | jq -r '.Certificate | \"\\(.NotAfter) \\(.CertificateArn)\"'; \
-                                      done", returnStdout: true).trim()
-
-
-
+                                      done) | sort | tail -1 | awk '{print \$2}'", returnStdout: true).trim()
 
             echo "CERT_KEY=${CERT_KEY}"
           
