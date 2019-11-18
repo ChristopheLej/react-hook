@@ -76,7 +76,7 @@ pipeline {
 
             def CERT_KEY = sh(script:"for WCERTARN in \$(aws acm list-certificates --region eu-west-1 | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'); \
                                       do \
-                                        aws acm describe-certificate --region eu-west-1 --certificate-arn \"\${WCERTARN}\" | jq -r '.Certificate | \"\(.NotAfter)\"'; \
+                                        aws acm describe-certificate --region eu-west-1 --certificate-arn \"\${WCERTARN}\" | jq -r '.Certificate | \"\\(.NotAfter)\"'; \
                                       done", returnStdout: true).trim()
 
 
