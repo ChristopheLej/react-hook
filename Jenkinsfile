@@ -25,21 +25,21 @@ pipeline {
 					env.AWS_ACCESS_KEY_ID			= "${CREDENTIALS_AWS_USR}"
 					env.AWS_SECRET_ACCESS_KEY	= "${CREDENTIALS_AWS_PSW}"
 
-          echo "Your choice is: ${params.Environment}"
+          // echo "Your choice is: ${params.Environment}"
 
-          echo "CHANGE_AUTHOR : ${env.CHANGE_AUTHOR}"
+          // echo "CHANGE_AUTHOR : ${env.CHANGE_AUTHOR}"
 
-          sh "echo ${env.TF_VAR_K8S_NODE_COUNT}"
+          // sh "echo ${env.TF_VAR_K8S_NODE_COUNT}"
 
-          def K8S_NODE_COUNT = env.TF_VAR_K8S_NODE_COUNT != null ? env.TF_VAR_K8S_NODE_COUNT : 3
+          // def K8S_NODE_COUNT = env.TF_VAR_K8S_NODE_COUNT != null ? env.TF_VAR_K8S_NODE_COUNT : 3
           
-          sh "echo ${K8S_NODE_COUNT}"
+          // sh "echo ${K8S_NODE_COUNT}"
 
-          Say('Hello')
+          // Say('Hello')
 
-          SayWorld('World')
+          // SayWorld('World')
 
-          sh "id"
+          // sh "id"
         }
       }
     }
@@ -76,13 +76,13 @@ pipeline {
 
             def CERT_KEY = sh(script:"for WCERTARN in \$(aws acm list-certificates --region eu-west-1 | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'); \
                                       do \
-                                        aws acm describe-certificate --region eu-west-1 --certificate-arn \"\${WCERTARN}\"; \
+                                        aws acm describe-certificate --region eu-west-1 --certificate-arn \"\${WCERTARN}\" | jq -r '.Certificate'; \
                                       done", returnStdout: true).trim()
 
 
 
 
-            echo "CERT_KEY=${DNS_ZONE}"
+            echo "CERT_KEY=${CERT_KEY}"
           
 
           }
