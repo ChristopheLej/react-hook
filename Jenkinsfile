@@ -16,7 +16,7 @@ pipeline {
 
     AWS_TEST     = "${'${params.Environment}' != 'Production' ? '${params.Environment}' : 'smartereff-aws-prod-usr-psw'}";
 
-    AWS_ACCOUNT1     = "${'${params.Environment}' != 'Production' ? 'smartereff-non-prod-aws-pw' : 'smartereff-aws-prod-usr-psw'}";
+    AWS_ACCOUNT1     = ${params.Environment} != 'Production' ? 'smartereff-non-prod-aws-pw' : 'smartereff-aws-prod-usr-psw'
     TF_VAR_DNS_ZONE1	= "('${params.Environment}' != 'Production') ? 'dispatchplus-nonprod.navblue.cloud' : 'dispatchplus.navblue.cloud'"
 
     AWS_REGION = "eu-west-1"
@@ -41,6 +41,7 @@ pipeline {
 
           echo "Your choice is: ${params.Environment}"
           echo "AWS_ACCOUNT: ${AWS_TEST}"
+          echo "AWS_ACCOUNT1: ${AWS_ACCOUNT1}"
 
           // echo "CHANGE_AUTHOR : ${env.CHANGE_AUTHOR}"
 
