@@ -14,14 +14,6 @@ pipeline {
   environment {
     CREDENTIALS_AWS = credentials("DISPATCHPLUS_AWS_DEV");
 
-    if (${params.Environment} != 'Production') {
-      AWS_ACCOUNT     = 'smartereff-aws-prod-usr-psw'
-      TF_VAR_DNS_ZONE	= 'dispatchplus.navblue.cloud'
-    } else {
-      AWS_ACCOUNT     = 'smartereff-non-prod-aws-pw'
-      TF_VAR_DNS_ZONE	= 'dispatchplus-nonprod.navblue.cloud'
-    }
-
 
     AWS_ACCOUNT1     = "${'${params.Environment}' != 'Production' ? 'smartereff-non-prod-aws-pw' : 'smartereff-aws-prod-usr-psw'}";
     TF_VAR_DNS_ZONE1	= "('${params.Environment}' != 'Production') ? 'dispatchplus-nonprod.navblue.cloud' : 'dispatchplus.navblue.cloud'"
@@ -36,6 +28,14 @@ pipeline {
 				script {
 					env.AWS_ACCESS_KEY_ID			= "${CREDENTIALS_AWS_USR}"
 					env.AWS_SECRET_ACCESS_KEY	= "${CREDENTIALS_AWS_PSW}"
+    if (${params.Environment} != 'Production') {
+      AWS_ACCOUNT     = 'smartereff-aws-prod-usr-psw'
+      TF_VAR_DNS_ZONE	= 'dispatchplus.navblue.cloud'
+    } else {
+      AWS_ACCOUNT     = 'smartereff-non-prod-aws-pw'
+      TF_VAR_DNS_ZONE	= 'dispatchplus-nonprod.navblue.cloud'
+    }
+
 
           echo "Your choice is: ${params.Environment}"
           echo "AWS_ACCOUNT: ${AWS_ACCOUNT}"
