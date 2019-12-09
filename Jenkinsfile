@@ -29,7 +29,7 @@ pipeline {
 					env.AWS_ACCESS_KEY_ID			= "${CREDENTIALS_AWS_USR}"
 					env.AWS_SECRET_ACCESS_KEY	= "${CREDENTIALS_AWS_PSW}"
 
-    if ("${params.Environment}" != 'Production') {
+    if ("${params.Environment}" == 'Production') {
       AWS_ACCOUNT     = 'smartereff-aws-prod-usr-psw'
       TF_VAR_DNS_ZONE	= 'dispatchplus.navblue.cloud'
     } else {
