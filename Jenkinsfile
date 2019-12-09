@@ -14,6 +14,10 @@ pipeline {
   environment {
     CREDENTIALS_AWS = credentials("DISPATCHPLUS_AWS_DEV");
 
+
+    AWS_ACCOUNT     = "${('${params.Environment}' != 'Production') ? 'smartereff-non-prod-aws-pw' : 'smartereff-aws-prod-usr-psw'}";
+    TF_VAR_DNS_ZONE	= "${('${params.Environment}' != 'Production') ? 'dispatchplus-nonprod.navblue.cloud' : 'dispatchplus.navblue.cloud'}"
+
     AWS_REGION = "eu-west-1"
   }
 
@@ -25,7 +29,9 @@ pipeline {
 					env.AWS_ACCESS_KEY_ID			= "${CREDENTIALS_AWS_USR}"
 					env.AWS_SECRET_ACCESS_KEY	= "${CREDENTIALS_AWS_PSW}"
 
-          // echo "Your choice is: ${params.Environment}"
+          echo "Your choice is: ${params.Environment}"
+          echo "AWS_ACCOUNT: ${AWS_ACCOUNT}"
+          echo "TF_VAR_DNS_ZONE: ${TF_VAR_DNS_ZONE}"
 
           // echo "CHANGE_AUTHOR : ${env.CHANGE_AUTHOR}"
 
@@ -63,30 +69,30 @@ pipeline {
     // }
 
 
-    stage ("Command") {
-      steps {
-        script {
-					docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
-					.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
+    // stage ("Command") {
+    //   steps {
+    //     script {
+		// 			docker.build("deploy-smarter-eff:deploy-smarter-eff", "-f deploy.Dockerfile --rm ${WORKSPACE}")
+		// 			.inside("--net=host --user jenkins:dockerbis -v /var/run/docker.sock:/var/run/docker.sock") { c->
 
-            env.DNS_ZONE = "dispatchplus.gfinav.net"
-            AWS_REGION = "eu-west-1"
+    //         env.DNS_ZONE = "dispatchplus.gfinav.net"
+    //         AWS_REGION = "eu-west-1"
 
-            def a = sh(script: "aws acm list-certificates --region \${AWS_REGION} | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'", returnStdout: true).trim() 
-            echo "a=${a}"
+    //         def a = sh(script: "aws acm list-certificates --region \${AWS_REGION} | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'", returnStdout: true).trim() 
+    //         echo "a=${a}"
 
-            def CERT_KEY = sh(script:"(for WCERTARN in \$(aws acm list-certificates --region \${AWS_REGION} | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'); \
-                                      do \
-                                        aws acm describe-certificate --region \${AWS_REGION} --certificate-arn \"\${WCERTARN}\" | jq -r '.Certificate | \"\\(.NotAfter) \\(.CertificateArn)\"'; \
-                                      done) | sort | tail -1 | awk '{print \$2}'", returnStdout: true).trim()
+    //         def CERT_KEY = sh(script:"(for WCERTARN in \$(aws acm list-certificates --region \${AWS_REGION} | jq -r --arg DNS \"*.\${DNS_ZONE}\" '.CertificateSummaryList[] | select(.DomainName == \$DNS) | .CertificateArn'); \
+    //                                   do \
+    //                                     aws acm describe-certificate --region \${AWS_REGION} --certificate-arn \"\${WCERTARN}\" | jq -r '.Certificate | \"\\(.NotAfter) \\(.CertificateArn)\"'; \
+    //                                   done) | sort | tail -1 | awk '{print \$2}'", returnStdout: true).trim()
 
-            echo "CERT_KEY=${CERT_KEY}"
+    //         echo "CERT_KEY=${CERT_KEY}"
           
 
-          }
-        }
-      }
-    }
+    //       }
+    //     }
+    //   }
+    // }
 
 
 		// stage ("test") {
