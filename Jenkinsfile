@@ -26,7 +26,7 @@ pipeline {
   stages {
 		stage ("Init") {
       environment {
-          TF_VAR_DNS_ZONE = "${params.environment != 'Production' ? 'gateway-nonprod.navblue.cloud.' : 'gateway.navblue.cloud.'}"
+          TF_VAR_DNS_ZONE = "${params.Environment != 'Production' ? 'gateway-nonprod.navblue.cloud.' : 'gateway.navblue.cloud.'}"
       }
 			steps {
 				script {
