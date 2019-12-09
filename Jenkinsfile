@@ -14,7 +14,7 @@ pipeline {
   environment {
     CREDENTIALS_AWS = credentials("DISPATCHPLUS_AWS_DEV");
 
-    AWS_TEST     = "${'${params.Environment}' != 'Production' ? "${params.Environment}" : 'smartereff-aws-prod-usr-psw'}";
+    AWS_TEST     = "${"${params.Environment}" != 'Production' ? "${params.Environment}" : 'smartereff-aws-prod-usr-psw'}";
 
     // AWS_ACCOUNT1     = "${"${params.Environment}" != 'Production' ? 'smartereff-non-prod-aws-pw' : 'smartereff-aws-prod-usr-psw'}"
     // TF_VAR_DNS_ZONE1	= "('${params.Environment}' != 'Production') ? 'dispatchplus-nonprod.navblue.cloud' : 'dispatchplus.navblue.cloud'"
