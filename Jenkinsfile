@@ -14,9 +14,17 @@ pipeline {
   environment {
     CREDENTIALS_AWS = credentials("DISPATCHPLUS_AWS_DEV");
 
+    if (${params.Environment} != 'Production') {
+      AWS_ACCOUNT     = 'smartereff-aws-prod-usr-psw'
+      TF_VAR_DNS_ZONE	= 'dispatchplus.navblue.cloud'
+    } else {
+      AWS_ACCOUNT     = 'smartereff-non-prod-aws-pw'
+      TF_VAR_DNS_ZONE	= 'dispatchplus-nonprod.navblue.cloud'
+    }
 
-    AWS_ACCOUNT     = "'${params.Environment}' != 'Production' ? 'smartereff-non-prod-aws-pw' : 'smartereff-aws-prod-usr-psw'";
-    TF_VAR_DNS_ZONE	= "('${params.Environment}' != 'Production') ? 'dispatchplus-nonprod.navblue.cloud' : 'dispatchplus.navblue.cloud'"
+
+    AWS_ACCOUNT1     = "${'${params.Environment}' != 'Production' ? 'smartereff-non-prod-aws-pw' : 'smartereff-aws-prod-usr-psw'}";
+    TF_VAR_DNS_ZONE1	= "('${params.Environment}' != 'Production') ? 'dispatchplus-nonprod.navblue.cloud' : 'dispatchplus.navblue.cloud'"
 
     AWS_REGION = "eu-west-1"
   }
@@ -32,6 +40,8 @@ pipeline {
           echo "Your choice is: ${params.Environment}"
           echo "AWS_ACCOUNT: ${AWS_ACCOUNT}"
           echo "TF_VAR_DNS_ZONE: ${TF_VAR_DNS_ZONE}"
+          echo "AWS_ACCOUNT1: ${AWS_ACCOUNT1}"
+          echo "TF_VAR_DNS_ZONE1: ${TF_VAR_DNS_ZONE1}"
 
           // echo "CHANGE_AUTHOR : ${env.CHANGE_AUTHOR}"
 
