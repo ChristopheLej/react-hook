@@ -30,7 +30,7 @@ pipeline {
 						choices: ['NonProd', 'Production'],
 						description: 'Name of the AWS environments')
 
-		credentials(name: 'CredsToUse', description: 'A user to build with', defaultValue: '', credentialType: "Username with password", required: true )
+		credentials(name: 'CredsToUse', description: 'A user to build with', defaultValue: 'DISPATCHPLUS_AWS_DEV', credentialType: "Username with password", required: true )
 	}
 
 	environment {
