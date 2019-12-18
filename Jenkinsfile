@@ -29,6 +29,8 @@ pipeline {
 	 	choice( name: 'Environment',
 						choices: ['NonProd', 'Production'],
 						description: 'Name of the AWS environment')
+
+		credentials(name: 'CredsToUse', description: 'A user to build with', defaultValue: '', credentialType: "Username with password", required: true )
 	}
 
 	environment {
